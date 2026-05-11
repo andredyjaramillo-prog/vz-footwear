@@ -373,11 +373,20 @@
     .vz-elige-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; max-width:480px; margin:0 auto; }
     .vz-elige-card { background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.07); border:2.5px solid transparent; transition:border-color 0.2s; }
     .vz-elige-card.active { border-color:var(--gold); }
-    .vz-elige-img { width:100%; aspect-ratio:1/1; object-fit:cover; }
+    .vz-elige-img { width:100%; aspect-ratio:1/1; object-fit:cover; cursor:pointer; }
     .vz-elige-info { padding:9px 10px 11px; }
     .vz-elige-name { font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:7px; }
     .vz-elige-btn { width:100%; background:var(--dark); color:#fff; border:none; border-radius:50px; padding:8px 0; font-size:11px; font-weight:700; cursor:pointer; transition:background 0.2s; }
     .vz-elige-card.active .vz-elige-btn { background:var(--gold); color:var(--dark); }
+
+    /* ── LIGHTBOX VZ ── */
+    .vz-lightbox { display:none; position:fixed; inset:0; z-index:99999; background:rgba(0,0,0,0.88); flex-direction:column; align-items:center; justify-content:center; padding:24px 20px; }
+    .vz-lightbox.open { display:flex; }
+    .vz-lightbox-card { background:#111; border-radius:20px; overflow:hidden; max-width:380px; width:100%; }
+    .vz-lightbox-img { width:100%; height:280px; object-fit:cover; object-position:center; display:block; }
+    .vz-lightbox-bar { width:100%; background:#1A1A1A; padding:14px 20px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .vz-lightbox-close { background:none; border:1px solid rgba(255,255,255,0.3); color:#fff; font-size:18px; width:36px; height:36px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .vz-lightbox-btn { flex:1; background:var(--wa); color:#fff; font-size:15px; font-weight:800; padding:12px 20px; border-radius:50px; text-align:center; cursor:pointer; border:none; }
 
     /* ── STICKY BOTTOM BAR (dentro de detail-screen) ── */
     .vz-sticky-bar {
@@ -679,6 +688,16 @@
 
 </div><!-- /detail-screen -->
 
+<!-- LIGHTBOX VZ -->
+<div id="vzLightbox" class="vz-lightbox" onclick="vzCerrarLightbox()">
+  <div class="vz-lightbox-card" onclick="event.stopPropagation()">
+    <img id="vzLightboxImg" class="vz-lightbox-img" src="" alt="" />
+    <div class="vz-lightbox-bar">
+      <button class="vz-lightbox-close" onclick="vzCerrarLightbox()">✕</button>
+      <button class="vz-lightbox-btn" onclick="vzPedirDesde()">🛍️ Quiero comprar</button>
+    </div>
+  </div>
+</div>
 
 <script>
   // WA bubble
@@ -885,7 +904,7 @@
       var card = document.createElement('div');
       card.className = 'vz-elige-card' + (i === idxActual ? ' active' : '');
       card.innerHTML =
-        '<img class="vz-elige-img" src="' + p.imgs[0] + '" alt="' + p.nombre + '" loading="lazy" />'
+        '<img class="vz-elige-img" src="' + p.imgs[0] + '" alt="' + p.nombre + '" loading="lazy" onclick="vzAbrirLightbox(\'' + p.imgs[0] + '\',' + i + ')" />'
         + '<div class="vz-elige-info">'
         + '<div class="vz-elige-name">' + p.nombre + '</div>'
         + '<button class="vz-elige-btn" onclick="elegirModelo(' + i + ')">Quiero comprar</button>'
@@ -896,9 +915,24 @@
 
   function elegirModelo(idx) {
     cambiarModelo(idx);
+    vzCerrarLightbox();
     setTimeout(function() {
       document.getElementById('vzForm').scrollIntoView({ behavior: 'smooth' });
     }, 120);
+  }
+
+  // ── LIGHTBOX ──
+  var vzLightboxIdx = 0;
+  function vzAbrirLightbox(src, idx) {
+    vzLightboxIdx = idx;
+    document.getElementById('vzLightboxImg').src = src;
+    document.getElementById('vzLightbox').classList.add('open');
+  }
+  function vzCerrarLightbox() {
+    document.getElementById('vzLightbox').classList.remove('open');
+  }
+  function vzPedirDesde() {
+    elegirModelo(vzLightboxIdx);
   }
 
   // ── CERRAR DETALLE ──
