@@ -570,7 +570,7 @@
 
     <!-- ELIGE TU MODELO -->
     <div class="vz-elige">
-      <div class="vz-elige-label">Elige tu modelo VZ</div>
+      <div class="vz-elige-label">Elige tu color</div>
       <div class="vz-elige-grid" id="vzEligeGrid"></div>
     </div>
 
@@ -709,25 +709,49 @@
       nombre: 'VZ Sierra',
       imgs: ['vz-sierra.jpg','vz-sierra-2.jpg','vz-sierra-3.jpg','vz-sierra-4.jpg'],
       headline: 'Tu modelo,<br><em>tu estilo.</em>',
-      sub: 'Eco cuero premium. Diseño versátil. Llega a tu puerta.'
+      sub: 'Eco cuero premium. Diseño versátil. Llega a tu puerta.',
+      colores: [
+        {nombre:'Crema',   img:'vz-sierra-crema.jpg'},
+        {nombre:'Mostaza', img:'vz-sierra-mostaza.jpg'},
+        {nombre:'Negro',   img:'vz-sierra-negro.jpg'},
+        {nombre:'Café',    img:'vz-sierra-cafe.jpg'}
+      ]
     },
     {
       nombre: 'VZ Ember',
       imgs: ['vz-ember.jpg','vz-ember-2.jpg','vz-ember-3.jpg','vz-ember-4.jpg','vz-ember-5.jpg'],
       headline: 'Actitud que<br><em>se nota.</em>',
-      sub: 'Distintos. Atrevidos. Con calidad que dura temporadas.'
+      sub: 'Distintos. Atrevidos. Con calidad que dura temporadas.',
+      colores: [
+        {nombre:'Azul',    img:'vz-ember-azul.jpg'},
+        {nombre:'Crema',   img:'vz-ember-crema.jpg'},
+        {nombre:'Café',    img:'vz-ember-cafe.jpg'},
+        {nombre:'Negro',   img:'vz-ember-negro.jpg'},
+        {nombre:'Mostaza', img:'vz-ember-mostaza.jpg'}
+      ]
     },
     {
       nombre: 'VZ Bruma',
       imgs: ['vz-bruma.jpg','vz-bruma-2.jpg','vz-bruma-3.jpg','vz-bruma-4.jpg'],
       headline: 'Suave, elegante,<br><em>tuyo.</em>',
-      sub: 'Delicadeza y carácter. El modelo que más enamora.'
+      sub: 'Delicadeza y carácter. El modelo que más enamora.',
+      colores: [
+        {nombre:'Nude',    img:'vz-bruma-nude.jpg'},
+        {nombre:'Negro',   img:'vz-bruma-negro.jpg'},
+        {nombre:'Azul',    img:'vz-bruma-azul.jpg'},
+        {nombre:'Café',    img:'vz-bruma-cafe.jpg'}
+      ]
     },
     {
       nombre: 'VZ Ranger',
       imgs: ['vz-ranger.jpg','vz-ranger-2.jpg','vz-ranger-3.jpg'],
       headline: 'Para los que<br><em>van lejos.</em>',
-      sub: 'Diseño robusto con hebilla. Comodidad sin límites.'
+      sub: 'Diseño robusto con hebilla. Comodidad sin límites.',
+      colores: [
+        {nombre:'Azul',    img:'vz-ranger-azul.jpg'},
+        {nombre:'Café',    img:'vz-ranger-cafe.jpg'},
+        {nombre:'Negro',   img:'vz-ranger-negro.jpg'}
+      ]
     }
   ];
   var modeloActual = 0;
@@ -896,35 +920,35 @@
     if (typeof fbq !== 'undefined') fbq('track', 'ViewContent', { content_name: productos[idx].nombre });
   }
 
-  // ── ELIGE TU MODELO (grilla de selección) ──
-  function vzBuildElige(idxActual) {
+  // ── ELIGE TU COLOR (colores del modelo activo) ──
+  function vzBuildElige(idxModelo) {
+    var p = productos[idxModelo];
+    var label = document.querySelector('.vz-elige-label');
+    if (label) label.textContent = 'Elige tu color — ' + p.nombre;
     var grid = document.getElementById('vzEligeGrid');
     grid.innerHTML = '';
-    productos.forEach(function(p, i) {
+    p.colores.forEach(function(c, i) {
       var card = document.createElement('div');
-      card.className = 'vz-elige-card' + (i === idxActual ? ' active' : '');
+      card.className = 'vz-elige-card';
       card.innerHTML =
-        '<img class="vz-elige-img" src="' + p.imgs[0] + '" alt="' + p.nombre + '" loading="lazy" onclick="vzAbrirLightbox(\'' + p.imgs[0] + '\',' + i + ')" />'
+        '<img class="vz-elige-img" src="' + c.img + '" alt="' + c.nombre + '" loading="lazy" onclick="vzAbrirLightbox(\'' + c.img + '\',\'' + c.nombre + '\')" />'
         + '<div class="vz-elige-info">'
-        + '<div class="vz-elige-name">' + p.nombre + '</div>'
-        + '<button class="vz-elige-btn" onclick="elegirModelo(' + i + ')">Quiero comprar</button>'
+        + '<div class="vz-elige-name">' + c.nombre + '</div>'
+        + '<button class="vz-elige-btn" onclick="vzElegirColor(\'' + c.nombre + '\')">Quiero comprar</button>'
         + '</div>';
       grid.appendChild(card);
     });
   }
 
-  function elegirModelo(idx) {
-    cambiarModelo(idx);
+  function vzElegirColor(nombreColor) {
     vzCerrarLightbox();
-    setTimeout(function() {
-      document.getElementById('vzForm').scrollIntoView({ behavior: 'smooth' });
-    }, 120);
+    document.getElementById('vzForm').scrollIntoView({ behavior: 'smooth' });
   }
 
   // ── LIGHTBOX ──
-  var vzLightboxIdx = 0;
-  function vzAbrirLightbox(src, idx) {
-    vzLightboxIdx = idx;
+  var vzLightboxColor = '';
+  function vzAbrirLightbox(src, nombreColor) {
+    vzLightboxColor = nombreColor;
     document.getElementById('vzLightboxImg').src = src;
     document.getElementById('vzLightbox').classList.add('open');
   }
@@ -932,7 +956,7 @@
     document.getElementById('vzLightbox').classList.remove('open');
   }
   function vzPedirDesde() {
-    elegirModelo(vzLightboxIdx);
+    vzElegirColor(vzLightboxColor);
   }
 
   // ── CERRAR DETALLE ──
