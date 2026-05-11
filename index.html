@@ -347,6 +347,7 @@
     .form-group label { display: block; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--dark); margin-bottom: 7px; }
     .form-group label span { color: #C0392B; }
     .form-group input,
+    .form-group select,
     .form-group textarea {
       width: 100%; padding: 13px 14px;
       border: 1.5px solid #DDD8CE; border-radius: 10px;
@@ -355,13 +356,15 @@
       transition: border-color 0.2s, box-shadow 0.2s;
       -webkit-appearance: none; appearance: none;
     }
-    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.15); }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.15); }
     .form-group textarea { resize: vertical; min-height: 70px; }
     .field-error { color: #C0392B; font-size: 12px; margin-top: 5px; display: none; }
-    .form-group.error input, .form-group.error textarea { border-color: #C0392B; }
+    .form-group.error input, .form-group.error select, .form-group.error textarea { border-color: #C0392B; }
     .form-group.error .field-error { display: block; }
     .detail-group.error .field-error { display: block; }
     .detail-group.error .detail-select { border-color: #C0392B; }
+    .select-wrap { position: relative; }
+    .select-wrap::after { content: '▾'; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--gold); font-size: 16px; pointer-events: none; }
 
     /* Trust */
     .detail-trust { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0; }
@@ -614,25 +617,16 @@
         </div>
 
         <!-- Cantidad -->
-        <div class="detail-group">
-          <div class="detail-group-label">Cantidad</div>
-          <div class="cantidad-group">
-            <div class="cantidad-option">
-              <input type="radio" name="d-cant" id="dc1" value="1" checked>
-              <label class="cantidad-label" for="dc1">
-                <span class="cant-num">1 par</span>
-                <span class="cant-price">$109.900</span>
-              </label>
-            </div>
-            <div class="cantidad-option">
-              <input type="radio" name="d-cant" id="dc2" value="2">
-              <label class="cantidad-label" for="dc2">
-                <span class="cant-num">2 pares</span>
-                <span class="cant-price">$199.900</span>
-                <span class="cant-badge">AHORRA $20K</span>
-              </label>
-            </div>
+        <div class="form-group" id="fg-cantidad">
+          <label>¿Cuántos pares? <span>*</span></label>
+          <div class="select-wrap">
+            <select id="d-cant" onchange="actualizarResumen()">
+              <option value="">Selecciona...</option>
+              <option value="1">1 par — $109.900</option>
+              <option value="2">2 pares — $199.900 (ahorra $20.000)</option>
+            </select>
           </div>
+          <div class="field-error">Selecciona la cantidad</div>
         </div>
 
         <!-- Talla -->
@@ -881,18 +875,16 @@
 
   // ── RESUMEN (actualiza al cambiar cantidad) ──
   function actualizarResumen() {
-    var cant = document.querySelector('input[name="d-cant"]:checked');
-    if (!cant) return;
-    var p     = productos[modeloActual];
-    var n     = parseInt(cant.value);
+    var cantVal = document.getElementById('d-cant').value;
+    if (!cantVal) return;
+    var p      = productos[modeloActual];
+    var n      = parseInt(cantVal);
     var precio = n === 2 ? '$199.900' : '$109.900';
     document.getElementById('resumen-modelo').textContent = p.nombre + ' × ' + n;
     document.getElementById('resumen-precio').textContent = precio;
     document.getElementById('resumen-total').textContent  = precio + ' COP';
     document.getElementById('vz-sticky-price').textContent = precio + ' COP';
   }
-  document.getElementById('dc1').addEventListener('change', actualizarResumen);
-  document.getElementById('dc2').addEventListener('change', actualizarResumen);
 
   // ── ACTUALIZAR DETALLE ──
   function actualizarDetalle(idx) {
@@ -916,8 +908,7 @@
     modeloActual = idx;
     actualizarDetalle(idx);
 
-    document.getElementById('dc1').checked = true;
-    if (dos) document.getElementById('dc2').checked = true;
+    document.getElementById('d-cant').value     = dos ? '2' : '';
     document.getElementById('d-talla').value    = '';
     document.getElementById('dp1').checked      = true;
     document.getElementById('d-nombre').value   = '';
@@ -1011,21 +1002,22 @@
   }
 
   function confirmarPedido() {
+    var cant         = document.getElementById('d-cant').value;
     var talla        = document.getElementById('d-talla').value;
     var nombre       = document.getElementById('d-nombre').value.trim();
     var celular      = document.getElementById('d-celular').value.trim();
     var departamento = document.getElementById('d-departamento').value.trim();
     var ciudad       = document.getElementById('d-ciudad').value.trim();
     var direccion    = document.getElementById('d-direccion').value.trim();
-    var cant         = document.querySelector('input[name="d-cant"]:checked').value;
     var pago         = 'Contraentrega';
 
     // Limpiar errores previos
-    ['fg-talla','fg-nombre','fg-celular','fg-departamento','fg-ciudad','fg-direccion'].forEach(function(id){
+    ['fg-cantidad','fg-talla','fg-nombre','fg-celular','fg-departamento','fg-ciudad','fg-direccion'].forEach(function(id){
       setFgError(id, false);
     });
 
     var ok = true;
+    if (!cant)               { setFgError('fg-cantidad', true);     ok = false; }
     if (!talla)              { setFgError('fg-talla', true);        ok = false; }
     if (!nombre)             { setFgError('fg-nombre', true);       ok = false; }
     if (celular.length < 10) { setFgError('fg-celular', true);      ok = false; }
@@ -1076,6 +1068,7 @@
     el.addEventListener('change', function(){ setFgError(fgId, false); });
   });
   document.getElementById('d-talla').addEventListener('change', function(){ setFgError('fg-talla', false); });
+  document.getElementById('d-cant').addEventListener('change', function(){ setFgError('fg-cantidad', false); });
 </script>
 
 </body>
