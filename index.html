@@ -511,6 +511,7 @@
     screen.scrollTop = 0;
     screen.classList.add('open');
     document.body.style.overflow = 'hidden';
+    history.pushState({ vzDetail: idx }, '', '#' + productos[idx].nombre.toLowerCase().replace(/\s+/g, '-'));
     if (typeof fbq !== 'undefined') fbq('track', 'ViewContent', { content_name: productos[idx].nombre });
   }
 
@@ -554,6 +555,7 @@
   function cerrarDetalle() {
     document.getElementById('detailScreen').classList.remove('open');
     document.body.style.overflow = '';
+    history.replaceState(null, '', location.pathname + location.search);
   }
 
   function confirmarPedido() {
@@ -598,6 +600,15 @@
 
     window.open('https://wa.me/573332826196?text=' + encodeURIComponent(msg), '_blank');
   }
+
+  // Botón retroceso del celular/navegador cierra el detalle
+  window.addEventListener('popstate', function() {
+    var screen = document.getElementById('detailScreen');
+    if (screen.classList.contains('open')) {
+      screen.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
 </script>
 
 </body>
