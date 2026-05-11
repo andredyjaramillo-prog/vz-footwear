@@ -885,11 +885,20 @@
     var cant     = document.querySelector('input[name="d-cant"]:checked').value;
     var pago     = 'Contraentrega';
 
-    if (!talla)              { alert('Por favor selecciona tu talla'); return; }
-    if (!nombre)             { alert('Por favor ingresa tu nombre'); return; }
-    if (celular.length < 10) { alert('Por favor ingresa un celular válido (10 dígitos)'); return; }
-    if (!ciudad)             { alert('Por favor ingresa tu ciudad'); return; }
-    if (!direccion)          { alert('Por favor ingresa tu dirección'); return; }
+    var errores = [];
+    ['d-talla','d-nombre','d-celular','d-ciudad','d-direccion'].forEach(function(id){
+      document.getElementById(id).style.border = '';
+    });
+    if (!talla)              { errores.push('d-talla'); }
+    if (!nombre)             { errores.push('d-nombre'); }
+    if (celular.length < 10) { errores.push('d-celular'); }
+    if (!ciudad)             { errores.push('d-ciudad'); }
+    if (!direccion)          { errores.push('d-direccion'); }
+    if (errores.length) {
+      errores.forEach(function(id){ document.getElementById(id).style.border = '2px solid #e53935'; });
+      document.getElementById(errores[0]).scrollIntoView({behavior:'smooth',block:'center'});
+      return;
+    }
 
     var p      = productos[modeloActual];
     var precio = cant == 2 ? '$199.900' : '$109.900';
@@ -918,6 +927,12 @@
 
     window.open('https://wa.me/573332826196?text=' + encodeURIComponent(msg), '_blank');
   }
+
+  ['d-talla','d-nombre','d-celular','d-ciudad','d-direccion'].forEach(function(id){
+    var el = document.getElementById(id);
+    el.addEventListener('change', function(){ el.style.border = ''; });
+    el.addEventListener('input',  function(){ el.style.border = ''; });
+  });
 </script>
 
 </body>
