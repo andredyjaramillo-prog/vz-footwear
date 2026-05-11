@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VZ Footwear — Botas Eco Cuero Premium</title>
+  <meta name="description" content="Botas eco cuero VZ. 4 modelos exclusivos. Pagas cuando recibes. Envío a todo Colombia." />
+
+  <!-- META PIXEL — reemplaza PIXEL_ID_VZ con tu pixel -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+    document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'PIXEL_ID_VZ');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=PIXEL_ID_VZ&ev=PageView&noscript=1"/></noscript>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Helvetica Neue', Arial, sans-serif; background: #F5F5F3; color: #1A1A1A; line-height: 1.5; overflow-x: hidden; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    :root {
+      --gold: #C9A84C;
+      --dark: #1A1A1A;
+      --light: #F5F5F3;
+      --gray: #6B6B6B;
+      --border: #E5E5E5;
+      --wa: #25D366;
+      --wa-dark: #1DA851;
+      --radius: 16px;
+    }
+
+    /* TOPBAR */
+    .topbar { background: var(--dark); color: #fff; text-align: center; font-size: 12px; padding: 9px 16px; letter-spacing: 0.8px; text-transform: uppercase; }
+    .topbar strong { color: var(--gold); }
+
+    /* HEADER */
+    header { background: #fff; border-bottom: 1px solid var(--border); padding: 16px 20px; display: flex; align-items: center; justify-content: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
+    .logo { font-size: 22px; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; color: var(--dark); }
+    .logo span { color: var(--gold); }
+
+    /* HERO */
+    .hero { background: #fff; padding: 28px 20px 24px; text-align: center; border-bottom: 1px solid var(--border); }
+    .hero-tag { display: inline-block; background: var(--dark); color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 6px 14px; border-radius: 50px; margin-bottom: 14px; }
+    .hero h1 { font-size: 27px; font-weight: 900; line-height: 1.2; margin-bottom: 10px; letter-spacing: -0.5px; }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero p { font-size: 14px; color: var(--gray); margin-bottom: 20px; }
+    .precio-hero { display: flex; align-items: center; justify-content: center; gap: 20px; }
+    .precio-item { text-align: center; }
+    .precio-item .label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--gray); margin-bottom: 2px; }
+    .precio-item .valor { font-size: 21px; font-weight: 900; }
+    .precio-item .valor small { font-size: 12px; font-weight: 400; color: var(--gray); }
+    .precio-divider { font-size: 24px; color: var(--border); font-weight: 200; }
+
+    /* CATALOGO */
+    .catalogo { padding: 24px 14px 8px; max-width: 480px; margin: 0 auto; }
+    .section-label { text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-bottom: 16px; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* PRODUCT CARD */
+    .product-card { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.07); cursor: pointer; transition: transform 0.18s, box-shadow 0.18s; }
+    .product-card:active { transform: scale(0.97); box-shadow: 0 1px 6px rgba(0,0,0,0.1); }
+    .product-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; object-position: center; background: #EFEFED; }
+    .product-info { padding: 11px 12px 13px; }
+    .product-name { font-size: 13px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 3px; }
+    .product-desc { font-size: 11px; color: var(--gray); margin-bottom: 9px; }
+    .product-price { font-size: 16px; font-weight: 900; margin-bottom: 9px; }
+    .product-price small { font-size: 11px; font-weight: 400; color: var(--gray); }
+    .btn-pedir { width: 100%; background: var(--dark); color: #fff; border: none; border-radius: 50px; padding: 9px 0; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; cursor: pointer; transition: background 0.2s; }
+    .btn-pedir:hover { background: #333; }
+
+    /* OFERTA 2 PARES */
+    .oferta-2 { background: var(--dark); color: #fff; border-radius: var(--radius); padding: 22px 20px; text-align: center; margin: 16px 14px; max-width: 452px; margin-left: auto; margin-right: auto; }
+    .oferta-2 .tag { display: inline-block; background: var(--gold); color: var(--dark); font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 12px; border-radius: 50px; margin-bottom: 12px; }
+    .oferta-2 h3 { font-size: 19px; font-weight: 900; margin-bottom: 6px; }
+    .oferta-2 p { font-size: 13px; color: rgba(255,255,255,0.65); margin-bottom: 14px; }
+    .oferta-2 .precio-grande { font-size: 34px; font-weight: 900; color: var(--gold); margin-bottom: 16px; }
+    .oferta-2 .precio-grande small { font-size: 14px; color: rgba(255,255,255,0.5); font-weight: 400; }
+    .btn-oferta { background: var(--gold); color: var(--dark); border: none; border-radius: 50px; padding: 13px 28px; font-size: 14px; font-weight: 800; cursor: pointer; width: 100%; letter-spacing: 0.3px; }
+
+    /* MÉTODOS DE PAGO */
+    .pagos { padding: 24px 14px; max-width: 480px; margin: 0 auto; }
+    .pagos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .pago-item { background: #fff; border-radius: 12px; padding: 14px 12px; text-align: center; box-shadow: 0 1px 6px rgba(0,0,0,0.06); }
+    .pago-icon { font-size: 22px; margin-bottom: 6px; }
+    .pago-nombre { font-size: 12px; font-weight: 700; margin-bottom: 2px; }
+    .pago-desc { font-size: 11px; color: var(--gray); }
+
+    /* BENEFICIOS */
+    .beneficios { background: #fff; padding: 24px 20px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .beneficios-list { display: flex; flex-direction: column; gap: 14px; max-width: 480px; margin: 0 auto; }
+    .beneficio { display: flex; align-items: center; gap: 14px; }
+    .beneficio-icon { width: 42px; height: 42px; background: var(--dark); border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .beneficio-text strong { font-size: 14px; display: block; margin-bottom: 1px; }
+    .beneficio-text span { font-size: 12px; color: var(--gray); }
+
+    /* FORMULARIO */
+    .form-section { background: #fff; padding: 32px 20px 44px; max-width: 480px; margin: 0 auto; }
+    .form-title { font-size: 22px; font-weight: 900; text-align: center; margin-bottom: 5px; }
+    .form-subtitle { font-size: 14px; color: var(--gray); text-align: center; margin-bottom: 24px; }
+
+    /* Producto seleccionado */
+    .producto-seleccionado { background: var(--light); border: 2px solid var(--dark); border-radius: 12px; padding: 13px 14px; display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .prod-sel-img { width: 52px; height: 52px; border-radius: 8px; object-fit: cover; background: #eee; flex-shrink: 0; }
+    .prod-sel-info { flex: 1; }
+    .prod-sel-name { font-size: 14px; font-weight: 800; text-transform: uppercase; }
+    .prod-sel-price { font-size: 13px; color: var(--gray); margin-top: 2px; }
+    .btn-cambiar { background: none; border: 1px solid var(--border); border-radius: 50px; padding: 6px 13px; font-size: 12px; cursor: pointer; color: var(--gray); white-space: nowrap; }
+
+    /* Cantidad */
+    .group-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray); margin-bottom: 10px; }
+    .cantidad-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
+    .cantidad-option { position: relative; }
+    .cantidad-option input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+    .cantidad-label { display: block; border: 2px solid var(--border); border-radius: 12px; padding: 12px 10px; text-align: center; cursor: pointer; transition: all 0.2s; }
+    .cantidad-option input:checked + .cantidad-label { border-color: var(--dark); background: var(--dark); color: #fff; }
+    .cantidad-label .cant-num { font-size: 14px; font-weight: 800; display: block; }
+    .cantidad-label .cant-price { font-size: 13px; margin-top: 2px; display: block; }
+    .cantidad-label .cant-badge { font-size: 10px; background: var(--gold); color: var(--dark); padding: 2px 7px; border-radius: 50px; font-weight: 700; margin-top: 5px; display: inline-block; }
+
+    /* Form fields */
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray); margin-bottom: 6px; }
+    .form-group input, .form-group select { width: 100%; border: 2px solid var(--border); border-radius: 10px; padding: 13px 14px; font-size: 15px; font-family: inherit; background: #fff; transition: border-color 0.2s; -webkit-appearance: none; appearance: none; }
+    .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--dark); }
+
+    /* Pago selector */
+    .pago-selector { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+    .pago-option { position: relative; }
+    .pago-option input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+    .pago-option-label { display: flex; align-items: center; gap: 12px; border: 2px solid var(--border); border-radius: 12px; padding: 13px 14px; cursor: pointer; transition: all 0.2s; }
+    .pago-option input:checked + .pago-option-label { border-color: var(--dark); background: #FAFAF8; }
+    .pago-option-label .pago-ico { font-size: 20px; }
+    .pago-option-label .pago-text strong { font-size: 14px; display: block; }
+    .pago-option-label .pago-text span { font-size: 12px; color: var(--gray); }
+    .pago-radio-dot { width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 50%; margin-left: auto; flex-shrink: 0; transition: all 0.2s; }
+    .pago-option input:checked + .pago-option-label .pago-radio-dot { border-color: var(--dark); background: var(--dark); }
+
+    /* Submit */
+    .btn-submit { width: 100%; background: var(--wa); color: #fff; border: none; border-radius: 14px; padding: 17px; font-size: 16px; font-weight: 800; cursor: pointer; letter-spacing: 0.3px; margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s; }
+    .btn-submit:hover { background: var(--wa-dark); }
+
+    /* FOOTER */
+    footer { background: var(--dark); color: rgba(255,255,255,0.5); text-align: center; padding: 22px 20px; font-size: 12px; }
+    footer strong { color: #fff; }
+
+    /* WA FLOTANTE */
+    .wa-float { position: fixed; bottom: 24px; right: 20px; z-index: 999; display: flex; align-items: center; gap: 10px; }
+    .wa-bubble { background: #fff; border-radius: 20px; padding: 8px 14px; font-size: 13px; font-weight: 600; box-shadow: 0 4px 16px rgba(0,0,0,0.15); white-space: nowrap; opacity: 0; transform: translateX(10px); transition: all 0.4s; }
+    .wa-bubble.show { opacity: 1; transform: translateX(0); }
+    .wa-btn { width: 54px; height: 54px; background: var(--wa); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(37,211,102,0.4); text-decoration: none; flex-shrink: 0; }
+    .wa-btn svg { width: 28px; height: 28px; fill: #fff; }
+
+    @media (max-width: 360px) {
+      .hero h1 { font-size: 23px; }
+      .grid { gap: 9px; }
+      .product-name { font-size: 12px; }
+      .product-price { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  Envío a todo Colombia &nbsp;·&nbsp; <strong>Pagas cuando recibes</strong> &nbsp;·&nbsp; 3–4 días
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">VZ <span>Footwear</span></div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">Colección Premium · Eco Cuero</div>
+  <h1>El estilo que buscabas<br><em>ya llegó.</em></h1>
+  <p>4 modelos exclusivos. Eco cuero premium.<br>Tallas 35 al 44. Envío Colombia.</p>
+  <div class="precio-hero">
+    <div class="precio-item">
+      <div class="label">1 par</div>
+      <div class="valor">$109.900 <small>COP</small></div>
+    </div>
+    <div class="precio-divider">|</div>
+    <div class="precio-item">
+      <div class="label">2 pares</div>
+      <div class="valor">$199.900 <small>COP</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- CATÁLOGO -->
+<section class="catalogo" id="catalogo">
+  <div class="section-label">Elige tu modelo</div>
+  <div class="grid">
+
+    <!-- VZ Sierra -->
+    <div class="product-card" onclick="seleccionarProducto('VZ Sierra','vz-sierra.jpg')">
+      <img class="product-img" src="vz-sierra.jpg" alt="VZ Sierra" loading="lazy" />
+      <div class="product-info">
+        <div class="product-name">VZ Sierra</div>
+        <div class="product-desc">Mostaza · Eco cuero</div>
+        <div class="product-price">$109.900 <small>COP</small></div>
+        <button class="btn-pedir">Pedir este</button>
+      </div>
+    </div>
+
+    <!-- VZ Ember -->
+    <div class="product-card" onclick="seleccionarProducto('VZ Ember','vz-ember.jpg')">
+      <img class="product-img" src="vz-ember.jpg" alt="VZ Ember" loading="lazy" />
+      <div class="product-info">
+        <div class="product-name">VZ Ember</div>
+        <div class="product-desc">Café oscuro · Eco cuero</div>
+        <div class="product-price">$109.900 <small>COP</small></div>
+        <button class="btn-pedir">Pedir este</button>
+      </div>
+    </div>
+
+    <!-- VZ Bruma -->
+    <div class="product-card" onclick="seleccionarProducto('VZ Bruma','vz-bruma.jpg')">
+      <img class="product-img" src="vz-bruma.jpg" alt="VZ Bruma" loading="lazy" />
+      <div class="product-info">
+        <div class="product-name">VZ Bruma</div>
+        <div class="product-desc">Beige · Eco cuero</div>
+        <div class="product-price">$109.900 <small>COP</small></div>
+        <button class="btn-pedir">Pedir este</button>
+      </div>
+    </div>
+
+    <!-- VZ Ranger -->
+    <div class="product-card" onclick="seleccionarProducto('VZ Ranger','vz-ranger.jpg')">
+      <img class="product-img" src="vz-ranger.jpg" alt="VZ Ranger" loading="lazy" />
+      <div class="product-info">
+        <div class="product-name">VZ Ranger</div>
+        <div class="product-desc">Café · Eco cuero</div>
+        <div class="product-price">$109.900 <small>COP</small></div>
+        <button class="btn-pedir">Pedir este</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- OFERTA 2 PARES -->
+<div class="oferta-2">
+  <div class="tag">Oferta especial</div>
+  <h3>Lleva 2 pares y ahorra</h3>
+  <p>Combina cualquier modelo. Colores a tu elección.</p>
+  <div class="precio-grande">$199.900 <small>COP</small></div>
+  <button class="btn-oferta" onclick="seleccionarProducto('VZ Sierra','vz-sierra.jpg', 2)">Ver oferta 2 pares</button>
+</div>
+
+<!-- MÉTODOS DE PAGO -->
+<section class="pagos">
+  <div class="section-label">Métodos de pago</div>
+  <div class="pagos-grid">
+    <div class="pago-item">
+      <div class="pago-icon">📦</div>
+      <div class="pago-nombre">Contraentrega</div>
+      <div class="pago-desc">Pagas cuando recibes</div>
+    </div>
+    <div class="pago-item">
+      <div class="pago-icon">📲</div>
+      <div class="pago-nombre">Transferencia</div>
+      <div class="pago-desc">Nequi · Bancolombia</div>
+    </div>
+    <div class="pago-item">
+      <div class="pago-icon">🔄</div>
+      <div class="pago-nombre">Cuotas Addi</div>
+      <div class="pago-desc">Sin tarjeta de crédito</div>
+    </div>
+    <div class="pago-item">
+      <div class="pago-icon">💳</div>
+      <div class="pago-nombre">Tarjeta Bold</div>
+      <div class="pago-desc">Crédito · Débito · PSE</div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section class="beneficios">
+  <div class="beneficios-list">
+    <div class="beneficio">
+      <div class="beneficio-icon">🇨🇴</div>
+      <div class="beneficio-text">
+        <strong>Envío a todo Colombia</strong>
+        <span>3 a 4 días hábiles a tu puerta</span>
+      </div>
+    </div>
+    <div class="beneficio">
+      <div class="beneficio-icon">✅</div>
+      <div class="beneficio-text">
+        <strong>Pagas cuando recibes</strong>
+        <span>Sin riesgo — contraentrega disponible</span>
+      </div>
+    </div>
+    <div class="beneficio">
+      <div class="beneficio-icon">⭐</div>
+      <div class="beneficio-text">
+        <strong>Eco cuero premium</strong>
+        <span>Material duradero, acabado de lujo</span>
+      </div>
+    </div>
+    <div class="beneficio">
+      <div class="beneficio-icon">📏</div>
+      <div class="beneficio-text">
+        <strong>Tallas 35 al 44</strong>
+        <span>Disponibles en todos los modelos</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULARIO -->
+<section class="form-section" id="pedir">
+  <div class="form-title">Confirmar pedido</div>
+  <div class="form-subtitle">Completa los datos y te contactamos por WhatsApp</div>
+
+  <!-- Producto seleccionado -->
+  <div class="producto-seleccionado">
+    <img class="prod-sel-img" id="prod-sel-img" src="vz-sierra.jpg" alt="" />
+    <div class="prod-sel-info">
+      <div class="prod-sel-name" id="prod-sel-name">VZ Sierra</div>
+      <div class="prod-sel-price" id="prod-sel-price">$109.900 COP</div>
+    </div>
+    <button class="btn-cambiar" onclick="document.getElementById('catalogo').scrollIntoView({behavior:'smooth'})">Cambiar</button>
+  </div>
+
+  <!-- Cantidad -->
+  <div class="group-label">Cantidad</div>
+  <div class="cantidad-group">
+    <div class="cantidad-option">
+      <input type="radio" name="cantidad" id="cant1" value="1" checked onchange="actualizarCantidad()">
+      <label class="cantidad-label" for="cant1">
+        <span class="cant-num">1 par</span>
+        <span class="cant-price">$109.900</span>
+      </label>
+    </div>
+    <div class="cantidad-option">
+      <input type="radio" name="cantidad" id="cant2" value="2" onchange="actualizarCantidad()">
+      <label class="cantidad-label" for="cant2">
+        <span class="cant-num">2 pares</span>
+        <span class="cant-price">$199.900</span>
+        <span class="cant-badge">AHORRA $20K</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- Segundo modelo (solo visible con 2 pares) -->
+  <div id="segundo-modelo" style="display:none;">
+    <div class="form-group">
+      <label>Segundo modelo</label>
+      <select id="modelo2">
+        <option value="VZ Sierra">VZ Sierra — Mostaza</option>
+        <option value="VZ Ember">VZ Ember — Café oscuro</option>
+        <option value="VZ Bruma">VZ Bruma — Beige</option>
+        <option value="VZ Ranger">VZ Ranger — Café</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Talla -->
+  <div class="form-group">
+    <label>Talla</label>
+    <select id="talla">
+      <option value="">Selecciona tu talla</option>
+      <option>35</option><option>36</option><option>37</option><option>38</option>
+      <option>39</option><option>40</option><option>41</option><option>42</option>
+      <option>43</option><option>44</option>
+    </select>
+  </div>
+
+  <!-- Método de pago -->
+  <div class="group-label">Método de pago</div>
+  <div class="pago-selector">
+    <div class="pago-option">
+      <input type="radio" name="pago" id="pago1" value="Contraentrega" checked>
+      <label class="pago-option-label" for="pago1">
+        <span class="pago-ico">📦</span>
+        <div class="pago-text">
+          <strong>Contraentrega</strong>
+          <span>Pagas cuando recibes el paquete</span>
+        </div>
+        <div class="pago-radio-dot"></div>
+      </label>
+    </div>
+    <div class="pago-option">
+      <input type="radio" name="pago" id="pago2" value="Transferencia Nequi/Bancolombia">
+      <label class="pago-option-label" for="pago2">
+        <span class="pago-ico">📲</span>
+        <div class="pago-text">
+          <strong>Transferencia</strong>
+          <span>Nequi · Bancolombia · Daviplata</span>
+        </div>
+        <div class="pago-radio-dot"></div>
+      </label>
+    </div>
+    <div class="pago-option">
+      <input type="radio" name="pago" id="pago3" value="Cuotas Addi">
+      <label class="pago-option-label" for="pago3">
+        <span class="pago-ico">🔄</span>
+        <div class="pago-text">
+          <strong>Cuotas — Addi</strong>
+          <span>Paga en cuotas sin tarjeta</span>
+        </div>
+        <div class="pago-radio-dot"></div>
+      </label>
+    </div>
+    <div class="pago-option">
+      <input type="radio" name="pago" id="pago4" value="Tarjeta Bold (crédito/débito/PSE)">
+      <label class="pago-option-label" for="pago4">
+        <span class="pago-ico">💳</span>
+        <div class="pago-text">
+          <strong>Tarjeta Bold</strong>
+          <span>Crédito · Débito · PSE</span>
+        </div>
+        <div class="pago-radio-dot"></div>
+      </label>
+    </div>
+  </div>
+
+  <!-- Datos personales -->
+  <div class="form-group">
+    <label>Nombre completo</label>
+    <input type="text" id="nombre" placeholder="Tu nombre completo" />
+  </div>
+  <div class="form-group">
+    <label>Celular</label>
+    <input type="tel" id="celular" placeholder="300 000 0000" maxlength="10" />
+  </div>
+  <div class="form-group">
+    <label>Ciudad</label>
+    <input type="text" id="ciudad" placeholder="Ciudad de entrega" />
+  </div>
+  <div class="form-group">
+    <label>Dirección completa</label>
+    <input type="text" id="direccion" placeholder="Calle, carrera, barrio" />
+  </div>
+
+  <button class="btn-submit" onclick="enviarPedido()">
+    <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:#fff;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Confirmar pedido por WhatsApp
+  </button>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>VZ Footwear</strong><br>
+  Eco cuero premium · Envíos a todo Colombia<br>
+  <small style="margin-top:6px;display:block;">© 2026 VZ Footwear · Todos los derechos reservados</small>
+</footer>
+
+<!-- WA FLOTANTE -->
+<div class="wa-float">
+  <div class="wa-bubble" id="waBubble">¿Tienes dudas? ¡Escríbenos!</div>
+  <a class="wa-btn" href="https://wa.me/573332826196?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20las%20botas%20VZ%20%F0%9F%91%9F" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+</div>
+
+<script>
+  setTimeout(function() {
+    document.getElementById('waBubble').classList.add('show');
+  }, 2500);
+
+  var productoActual = 'VZ Sierra';
+  var imgActual = 'vz-sierra.jpg';
+
+  function seleccionarProducto(nombre, img, cantidad) {
+    productoActual = nombre;
+    imgActual = img;
+    document.getElementById('prod-sel-name').textContent = nombre;
+    document.getElementById('prod-sel-img').src = img;
+    if (cantidad === 2) {
+      document.getElementById('cant2').checked = true;
+      actualizarCantidad();
+    }
+    document.getElementById('pedir').scrollIntoView({ behavior: 'smooth' });
+    if (typeof fbq !== 'undefined') fbq('track', 'ViewContent', { content_name: nombre });
+  }
+
+  function actualizarCantidad() {
+    var es2 = document.getElementById('cant2').checked;
+    document.getElementById('segundo-modelo').style.display = es2 ? 'block' : 'none';
+    document.getElementById('prod-sel-price').textContent = es2 ? '$199.900 COP' : '$109.900 COP';
+  }
+
+  function enviarPedido() {
+    var cantidad = document.querySelector('input[name="cantidad"]:checked').value;
+    var talla = document.getElementById('talla').value;
+    var pago = document.querySelector('input[name="pago"]:checked').value;
+    var nombre = document.getElementById('nombre').value.trim();
+    var celular = document.getElementById('celular').value.trim();
+    var ciudad = document.getElementById('ciudad').value.trim();
+    var direccion = document.getElementById('direccion').value.trim();
+
+    if (!talla) { alert('Por favor selecciona tu talla'); return; }
+    if (!nombre) { alert('Por favor ingresa tu nombre'); return; }
+    if (celular.length < 10) { alert('Por favor ingresa un celular válido (10 dígitos)'); return; }
+    if (!ciudad) { alert('Por favor ingresa tu ciudad'); return; }
+    if (!direccion) { alert('Por favor ingresa tu dirección'); return; }
+
+    var precio = cantidad == 2 ? '$199.900' : '$109.900';
+    var modelo2txt = '';
+    if (cantidad == 2) {
+      modelo2txt = '\nSegundo modelo: ' + document.getElementById('modelo2').value;
+    }
+
+    var msg = '🛍️ NUEVO PEDIDO — VZ Footwear\n'
+      + 'PRODUCTO: ' + productoActual + modelo2txt + '\n'
+      + 'Cantidad: ' + cantidad + ' par(es) | Talla: ' + talla + '\n'
+      + '💳 PAGO: ' + pago + '\n'
+      + '──────────────\n'
+      + 'CLIENTE: ' + nombre + '\n'
+      + 'Celular: ' + celular + '\n'
+      + 'Ciudad: ' + ciudad + '\n'
+      + 'Dirección: ' + direccion + '\n'
+      + '──────────────\n'
+      + 'TOTAL: ' + precio + ' COP';
+
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'InitiateCheckout');
+      fbq('track', 'Purchase', {
+        value: cantidad == 2 ? 199900 : 109900,
+        currency: 'COP',
+        content_name: productoActual
+      });
+    }
+
+    window.open('https://wa.me/573332826196?text=' + encodeURIComponent(msg), '_blank');
+  }
+</script>
+
+</body>
+</html>
