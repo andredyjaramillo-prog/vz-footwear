@@ -343,10 +343,25 @@
     .detail-divider { height: 1px; background: var(--border); margin: 20px 0; }
 
     /* Campos envío */
-    .form-group { margin-bottom: 12px; }
-    .form-group label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray); margin-bottom: 5px; }
-    .form-group input { width: 100%; border: 2px solid var(--border); border-radius: 10px; padding: 13px 14px; font-size: 15px; font-family: inherit; background: #fff; -webkit-appearance: none; transition: border-color 0.18s; }
-    .form-group input:focus { outline: none; border-color: var(--dark); }
+    .form-group { margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--dark); margin-bottom: 7px; }
+    .form-group label span { color: #C0392B; }
+    .form-group input,
+    .form-group textarea {
+      width: 100%; padding: 13px 14px;
+      border: 1.5px solid #DDD8CE; border-radius: 10px;
+      font-size: 15px; font-family: inherit; color: var(--dark);
+      background: #FAFAF8;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none; appearance: none;
+    }
+    .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.15); }
+    .form-group textarea { resize: vertical; min-height: 70px; }
+    .field-error { color: #C0392B; font-size: 12px; margin-top: 5px; display: none; }
+    .form-group.error input, .form-group.error textarea { border-color: #C0392B; }
+    .form-group.error .field-error { display: block; }
+    .detail-group.error .field-error { display: block; }
+    .detail-group.error .detail-select { border-color: #C0392B; }
 
     /* Trust */
     .detail-trust { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0; }
@@ -621,14 +636,15 @@
         </div>
 
         <!-- Talla -->
-        <div class="detail-group">
-          <div class="detail-group-label">Talla</div>
+        <div class="detail-group" id="fg-talla">
+          <div class="detail-group-label">Talla <span style="color:#C0392B">*</span></div>
           <select class="detail-select" id="d-talla">
             <option value="">Selecciona tu talla</option>
             <option>34</option><option>35</option><option>36</option><option>37</option><option>38</option>
             <option>39</option><option>40</option><option>41</option><option>42</option>
             <option>43</option><option>44</option>
           </select>
+          <div class="field-error">Selecciona tu talla</div>
         </div>
 
         <!-- Método de pago (fijo: contraentrega) -->
@@ -639,21 +655,30 @@
         <!-- Datos envío -->
         <div class="detail-group">
           <div class="detail-group-label">Tus datos de envío</div>
-          <div class="form-group">
-            <label>Nombre completo</label>
-            <input type="text" id="d-nombre" placeholder="Tu nombre completo" autocomplete="name" />
+          <div class="form-group" id="fg-nombre">
+            <label>Nombre completo <span>*</span></label>
+            <input type="text" id="d-nombre" placeholder="Ej: Laura Martínez" autocomplete="name" />
+            <div class="field-error">Ingresa tu nombre completo</div>
           </div>
-          <div class="form-group">
-            <label>Celular</label>
-            <input type="tel" id="d-celular" placeholder="300 000 0000" maxlength="10" autocomplete="tel" />
+          <div class="form-group" id="fg-celular">
+            <label>Celular <span>*</span></label>
+            <input type="tel" id="d-celular" placeholder="Ej: 3001234567" maxlength="10" autocomplete="tel" inputmode="numeric" />
+            <div class="field-error">Ingresa tu número de celular (10 dígitos)</div>
           </div>
-          <div class="form-group">
-            <label>Ciudad</label>
-            <input type="text" id="d-ciudad" placeholder="Ciudad de entrega" autocomplete="address-level2" />
+          <div class="form-group" id="fg-departamento">
+            <label>Departamento <span>*</span></label>
+            <input type="text" id="d-departamento" placeholder="Ej: Cundinamarca, Antioquia, Valle..." autocomplete="address-level1" />
+            <div class="field-error">Ingresa tu departamento</div>
           </div>
-          <div class="form-group">
-            <label>Dirección completa</label>
-            <input type="text" id="d-direccion" placeholder="Calle, carrera, barrio, apto" autocomplete="street-address" />
+          <div class="form-group" id="fg-ciudad">
+            <label>Ciudad <span>*</span></label>
+            <input type="text" id="d-ciudad" placeholder="Ej: Bogotá, Medellín, Cali..." autocomplete="address-level2" />
+            <div class="field-error">Ingresa tu ciudad</div>
+          </div>
+          <div class="form-group" id="fg-direccion">
+            <label>Dirección de entrega <span>*</span></label>
+            <textarea id="d-direccion" placeholder="Ej: Calle 80 #45-12, Apto 301, Barrio Los Pinos" rows="3" autocomplete="street-address"></textarea>
+            <div class="field-error">Ingresa la dirección completa</div>
           </div>
         </div>
 
@@ -978,27 +1003,39 @@
   });
 
   // ── CONFIRMAR PEDIDO ──
-  function confirmarPedido() {
-    var talla    = document.getElementById('d-talla').value;
-    var nombre   = document.getElementById('d-nombre').value.trim();
-    var celular  = document.getElementById('d-celular').value.trim();
-    var ciudad   = document.getElementById('d-ciudad').value.trim();
-    var direccion= document.getElementById('d-direccion').value.trim();
-    var cant     = document.querySelector('input[name="d-cant"]:checked').value;
-    var pago     = 'Contraentrega';
+  function setFgError(id, hasError) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    if (hasError) el.classList.add('error');
+    else          el.classList.remove('error');
+  }
 
-    var errores = [];
-    ['d-talla','d-nombre','d-celular','d-ciudad','d-direccion'].forEach(function(id){
-      document.getElementById(id).style.border = '';
+  function confirmarPedido() {
+    var talla        = document.getElementById('d-talla').value;
+    var nombre       = document.getElementById('d-nombre').value.trim();
+    var celular      = document.getElementById('d-celular').value.trim();
+    var departamento = document.getElementById('d-departamento').value.trim();
+    var ciudad       = document.getElementById('d-ciudad').value.trim();
+    var direccion    = document.getElementById('d-direccion').value.trim();
+    var cant         = document.querySelector('input[name="d-cant"]:checked').value;
+    var pago         = 'Contraentrega';
+
+    // Limpiar errores previos
+    ['fg-talla','fg-nombre','fg-celular','fg-departamento','fg-ciudad','fg-direccion'].forEach(function(id){
+      setFgError(id, false);
     });
-    if (!talla)              { errores.push('d-talla'); }
-    if (!nombre)             { errores.push('d-nombre'); }
-    if (celular.length < 10) { errores.push('d-celular'); }
-    if (!ciudad)             { errores.push('d-ciudad'); }
-    if (!direccion)          { errores.push('d-direccion'); }
-    if (errores.length) {
-      errores.forEach(function(id){ document.getElementById(id).style.border = '2px solid #e53935'; });
-      document.getElementById(errores[0]).scrollIntoView({behavior:'smooth',block:'center'});
+
+    var ok = true;
+    if (!talla)              { setFgError('fg-talla', true);        ok = false; }
+    if (!nombre)             { setFgError('fg-nombre', true);       ok = false; }
+    if (celular.length < 10) { setFgError('fg-celular', true);      ok = false; }
+    if (!departamento)       { setFgError('fg-departamento', true); ok = false; }
+    if (!ciudad)             { setFgError('fg-ciudad', true);       ok = false; }
+    if (!direccion)          { setFgError('fg-direccion', true);    ok = false; }
+
+    if (!ok) {
+      var first = document.querySelector('.form-group.error, .detail-group.error');
+      if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
 
@@ -1013,6 +1050,7 @@
       + '──────────────\n'
       + 'CLIENTE: ' + nombre + '\n'
       + 'Celular: ' + celular + '\n'
+      + 'Departamento: ' + departamento + '\n'
       + 'Ciudad: ' + ciudad + '\n'
       + 'Dirección: ' + direccion + '\n'
       + '──────────────\n'
@@ -1030,11 +1068,14 @@
     window.open('https://wa.me/573332826196?text=' + encodeURIComponent(msg), '_blank');
   }
 
-  ['d-talla','d-nombre','d-celular','d-ciudad','d-direccion'].forEach(function(id){
+  // Limpiar error al corregir campo
+  ['d-nombre','d-celular','d-departamento','d-ciudad','d-direccion'].forEach(function(id){
     var el = document.getElementById(id);
-    el.addEventListener('change', function(){ el.style.border = ''; });
-    el.addEventListener('input',  function(){ el.style.border = ''; });
+    var fgId = 'fg-' + id.replace('d-', '');
+    el.addEventListener('input',  function(){ setFgError(fgId, false); });
+    el.addEventListener('change', function(){ setFgError(fgId, false); });
   });
+  document.getElementById('d-talla').addEventListener('change', function(){ setFgError('fg-talla', false); });
 </script>
 
 </body>
