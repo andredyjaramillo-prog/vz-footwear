@@ -367,6 +367,18 @@
     .btn-pedido:active { background: var(--wa-dark); }
     .form-nota { text-align: center; font-size: 12px; color: #aaa; margin-top: 12px; }
 
+    /* ── ELIGE TU MODELO (selección dentro del detalle) ── */
+    .vz-elige { background: #F5F5F3; padding: 24px 14px 20px; }
+    .vz-elige-label { text-align:center; font-size:11px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gray); margin-bottom:14px; }
+    .vz-elige-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; max-width:480px; margin:0 auto; }
+    .vz-elige-card { background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.07); border:2.5px solid transparent; transition:border-color 0.2s; }
+    .vz-elige-card.active { border-color:var(--gold); }
+    .vz-elige-img { width:100%; aspect-ratio:1/1; object-fit:cover; }
+    .vz-elige-info { padding:9px 10px 11px; }
+    .vz-elige-name { font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:7px; }
+    .vz-elige-btn { width:100%; background:var(--dark); color:#fff; border:none; border-radius:50px; padding:8px 0; font-size:11px; font-weight:700; cursor:pointer; transition:background 0.2s; }
+    .vz-elige-card.active .vz-elige-btn { background:var(--gold); color:var(--dark); }
+
     /* ── STICKY BOTTOM BAR (dentro de detail-screen) ── */
     .vz-sticky-bar {
       flex-shrink: 0;
@@ -546,6 +558,12 @@
         Ver opciones y pedir &nbsp;↓
       </button>
     </section>
+
+    <!-- ELIGE TU MODELO -->
+    <div class="vz-elige">
+      <div class="vz-elige-label">Elige tu modelo VZ</div>
+      <div class="vz-elige-grid" id="vzEligeGrid"></div>
+    </div>
 
     <!-- FORMULARIO (estilo botas) -->
     <section class="vz-form-section" id="vzForm">
@@ -845,16 +863,42 @@
 
     history.pushState({ vzDetail: idx }, '', '#' + productos[idx].nombre.toLowerCase().replace(/\s+/g, '-'));
     actualizarResumen();
+    vzBuildElige(idx);
 
     if (typeof fbq !== 'undefined') fbq('track', 'ViewContent', { content_name: productos[idx].nombre });
   }
 
-  // ── CAMBIAR MODELO (desde los dots) ──
+  // ── CAMBIAR MODELO (desde los dots o tarjetas) ──
   function cambiarModelo(idx) {
     actualizarDetalle(idx);
     document.getElementById('detailScroll').scrollTop = 0;
+    vzBuildElige(idx);
     history.replaceState({ vzDetail: idx }, '', '#' + productos[idx].nombre.toLowerCase().replace(/\s+/g, '-'));
     if (typeof fbq !== 'undefined') fbq('track', 'ViewContent', { content_name: productos[idx].nombre });
+  }
+
+  // ── ELIGE TU MODELO (grilla de selección) ──
+  function vzBuildElige(idxActual) {
+    var grid = document.getElementById('vzEligeGrid');
+    grid.innerHTML = '';
+    productos.forEach(function(p, i) {
+      var card = document.createElement('div');
+      card.className = 'vz-elige-card' + (i === idxActual ? ' active' : '');
+      card.innerHTML =
+        '<img class="vz-elige-img" src="' + p.imgs[0] + '" alt="' + p.nombre + '" loading="lazy" />'
+        + '<div class="vz-elige-info">'
+        + '<div class="vz-elige-name">' + p.nombre + '</div>'
+        + '<button class="vz-elige-btn" onclick="elegirModelo(' + i + ')">Quiero comprar</button>'
+        + '</div>';
+      grid.appendChild(card);
+    });
+  }
+
+  function elegirModelo(idx) {
+    cambiarModelo(idx);
+    setTimeout(function() {
+      document.getElementById('vzForm').scrollIntoView({ behavior: 'smooth' });
+    }, 120);
   }
 
   // ── CERRAR DETALLE ──
