@@ -598,50 +598,14 @@
           <div class="detail-group-label">Talla</div>
           <select class="detail-select" id="d-talla">
             <option value="">Selecciona tu talla</option>
-            <option>35</option><option>36</option><option>37</option><option>38</option>
+            <option>34</option><option>35</option><option>36</option><option>37</option><option>38</option>
             <option>39</option><option>40</option><option>41</option><option>42</option>
             <option>43</option><option>44</option>
           </select>
         </div>
 
-        <!-- Método de pago -->
-        <div class="detail-group">
-          <div class="detail-group-label">Método de pago</div>
-          <div class="pago-selector">
-            <div class="pago-option">
-              <input type="radio" name="d-pago" id="dp1" value="Contraentrega" checked>
-              <label class="pago-option-label" for="dp1">
-                <span class="pago-ico">📦</span>
-                <div class="pago-text"><strong>Contraentrega</strong><span>Pagas cuando recibes el paquete</span></div>
-                <div class="pago-radio-dot"></div>
-              </label>
-            </div>
-            <div class="pago-option">
-              <input type="radio" name="d-pago" id="dp2" value="Transferencia Nequi/Bancolombia">
-              <label class="pago-option-label" for="dp2">
-                <span class="pago-ico">📲</span>
-                <div class="pago-text"><strong>Transferencia</strong><span>Nequi · Bancolombia · Daviplata</span></div>
-                <div class="pago-radio-dot"></div>
-              </label>
-            </div>
-            <div class="pago-option">
-              <input type="radio" name="d-pago" id="dp3" value="Cuotas Addi">
-              <label class="pago-option-label" for="dp3">
-                <span class="pago-ico">🔄</span>
-                <div class="pago-text"><strong>Cuotas — Addi</strong><span>Paga en cuotas sin tarjeta</span></div>
-                <div class="pago-radio-dot"></div>
-              </label>
-            </div>
-            <div class="pago-option">
-              <input type="radio" name="d-pago" id="dp4" value="Tarjeta Bold (crédito/débito/PSE)">
-              <label class="pago-option-label" for="dp4">
-                <span class="pago-ico">💳</span>
-                <div class="pago-text"><strong>Tarjeta Bold</strong><span>Crédito · Débito · PSE</span></div>
-                <div class="pago-radio-dot"></div>
-              </label>
-            </div>
-          </div>
-        </div>
+        <!-- Método de pago (fijo: contraentrega) -->
+        <input type="hidden" id="dp1" name="d-pago" value="Contraentrega" />
 
         <div class="detail-divider"></div>
 
@@ -919,7 +883,7 @@
     var ciudad   = document.getElementById('d-ciudad').value.trim();
     var direccion= document.getElementById('d-direccion').value.trim();
     var cant     = document.querySelector('input[name="d-cant"]:checked').value;
-    var pago     = document.querySelector('input[name="d-pago"]:checked').value;
+    var pago     = 'Contraentrega';
 
     if (!talla)              { alert('Por favor selecciona tu talla'); return; }
     if (!nombre)             { alert('Por favor ingresa tu nombre'); return; }
