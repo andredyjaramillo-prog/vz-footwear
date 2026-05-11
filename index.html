@@ -629,6 +629,20 @@
           <div class="field-error">Selecciona la cantidad</div>
         </div>
 
+        <!-- Modelo 2do par -->
+        <div class="form-group" id="fg-modelo2" style="display:none">
+          <label>Modelo del 2do par</label>
+          <div class="select-wrap">
+            <select id="d-modelo2">
+              <option value="">Mismo modelo</option>
+              <option value="VZ Sierra">VZ Sierra</option>
+              <option value="VZ Ember">VZ Ember</option>
+              <option value="VZ Bruma">VZ Bruma</option>
+              <option value="VZ Ranger">VZ Ranger</option>
+            </select>
+          </div>
+        </div>
+
         <!-- Talla -->
         <div class="detail-group" id="fg-talla">
           <div class="detail-group-label">Talla <span style="color:#C0392B">*</span></div>
@@ -876,10 +890,13 @@
   // ── RESUMEN (actualiza al cambiar cantidad) ──
   function actualizarResumen() {
     var cantVal = document.getElementById('d-cant').value;
+    var n       = parseInt(cantVal) || 0;
+    var precio  = n === 2 ? '$199.900' : '$109.900';
+    var fg2     = document.getElementById('fg-modelo2');
+    if (fg2) fg2.style.display = (n === 2) ? '' : 'none';
+    if (n !== 2) document.getElementById('d-modelo2').value = '';
     if (!cantVal) return;
-    var p      = productos[modeloActual];
-    var n      = parseInt(cantVal);
-    var precio = n === 2 ? '$199.900' : '$109.900';
+    var p = productos[modeloActual];
     document.getElementById('resumen-modelo').textContent = p.nombre + ' × ' + n;
     document.getElementById('resumen-precio').textContent = precio;
     document.getElementById('resumen-total').textContent  = precio + ' COP';
@@ -909,6 +926,8 @@
     actualizarDetalle(idx);
 
     document.getElementById('d-cant').value     = dos ? '2' : '';
+    document.getElementById('d-modelo2').value  = '';
+    document.getElementById('fg-modelo2').style.display = dos ? '' : 'none';
     document.getElementById('d-talla').value    = '';
     document.getElementById('dp1').checked      = true;
     document.getElementById('d-nombre').value   = '';
@@ -1031,13 +1050,14 @@
       return;
     }
 
-    var p      = productos[modeloActual];
-    var precio = cant == 2 ? '$199.900' : '$109.900';
+    var p        = productos[modeloActual];
+    var modelo2  = document.getElementById('d-modelo2').value;
+    var precio   = cant == 2 ? '$199.900' : '$109.900';
 
     var msg = '🛍️ NUEVO PEDIDO — VZ Footwear\n'
-      + 'PRODUCTO: ' + p.nombre + '\n'
+      + 'Par 1: ' + p.nombre + ' — Talla ' + talla + '\n'
+      + (cant == 2 ? 'Par 2: ' + (modelo2 || p.nombre) + ' — Talla ' + talla + '\n' : '')
       + 'Cantidad: ' + cant + ' par' + (cant == 2 ? 'es' : '') + ' — ' + precio + ' COP\n'
-      + 'Talla: ' + talla + '\n'
       + '💳 PAGO: ' + pago + '\n'
       + '──────────────\n'
       + 'CLIENTE: ' + nombre + '\n'
