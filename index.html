@@ -27,6 +27,7 @@
 
     :root {
       --gold: #C9A84C;
+      --gold-light: #D4A843;
       --dark: #1A1A1A;
       --light: #F5F5F3;
       --gray: #6B6B6B;
@@ -36,16 +37,16 @@
       --radius: 16px;
     }
 
-    /* TOPBAR */
+    /* ── TOPBAR ── */
     .topbar { background: var(--dark); color: #fff; text-align: center; font-size: 12px; padding: 9px 16px; letter-spacing: 0.8px; text-transform: uppercase; }
     .topbar strong { color: var(--gold); }
 
-    /* HEADER */
+    /* ── HEADER ── */
     header { background: #fff; border-bottom: 1px solid var(--border); padding: 16px 20px; display: flex; align-items: center; justify-content: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 8px rgba(0,0,0,0.06); }
     .logo { font-size: 22px; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; color: var(--dark); }
     .logo span { color: var(--gold); }
 
-    /* HERO */
+    /* ── HERO (screen 1) ── */
     .hero { background: #fff; padding: 28px 20px 24px; text-align: center; border-bottom: 1px solid var(--border); }
     .hero-tag { display: inline-block; background: var(--dark); color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 6px 14px; border-radius: 50px; margin-bottom: 14px; }
     .hero h1 { font-size: 27px; font-weight: 900; line-height: 1.2; margin-bottom: 10px; letter-spacing: -0.5px; }
@@ -58,12 +59,12 @@
     .precio-item .valor small { font-size: 12px; font-weight: 400; color: var(--gray); }
     .precio-divider { font-size: 24px; color: var(--border); font-weight: 200; }
 
-    /* CATALOGO */
+    /* ── CATÁLOGO ── */
     .catalogo { padding: 24px 14px 8px; max-width: 480px; margin: 0 auto; }
     .section-label { text-align: center; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-bottom: 16px; }
     .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
-    /* PRODUCT CARD */
+    /* ── PRODUCT CARD ── */
     .product-card { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.07); cursor: pointer; transition: transform 0.18s, box-shadow 0.18s; }
     .product-card:active { transform: scale(0.97); box-shadow: 0 1px 6px rgba(0,0,0,0.1); }
     .product-img { width: 100%; aspect-ratio: 1/1; object-fit: cover; object-position: center; background: #EFEFED; }
@@ -75,9 +76,8 @@
     .price-1par small { font-size: 10px; font-weight: 400; color: var(--gray); }
     .price-2par { font-size: 11px; color: var(--gold); font-weight: 700; margin-top: 1px; }
     .btn-pedir { width: 100%; background: var(--dark); color: #fff; border: none; border-radius: 50px; padding: 9px 0; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; cursor: pointer; transition: background 0.2s; }
-    .btn-pedir:hover { background: #333; }
 
-    /* OFERTA 2 PARES */
+    /* ── OFERTA 2 PARES ── */
     .oferta-2 { background: var(--dark); color: #fff; border-radius: var(--radius); padding: 22px 20px; text-align: center; margin: 16px 14px 28px; max-width: 452px; margin-left: auto; margin-right: auto; }
     .oferta-2 .tag { display: inline-block; background: var(--gold); color: var(--dark); font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 12px; border-radius: 50px; margin-bottom: 12px; }
     .oferta-2 h3 { font-size: 19px; font-weight: 900; margin-bottom: 6px; }
@@ -86,55 +86,232 @@
     .oferta-2 .precio-grande small { font-size: 14px; color: rgba(255,255,255,0.5); font-weight: 400; }
     .btn-oferta { background: var(--gold); color: var(--dark); border: none; border-radius: 50px; padding: 13px 28px; font-size: 14px; font-weight: 800; cursor: pointer; width: 100%; letter-spacing: 0.3px; }
 
-    /* WA FLOTANTE */
+    /* ── WA FLOTANTE ── */
     .wa-float { position: fixed; bottom: 24px; right: 20px; z-index: 500; display: flex; align-items: center; gap: 10px; }
     .wa-bubble { background: #fff; border-radius: 20px; padding: 8px 14px; font-size: 13px; font-weight: 600; box-shadow: 0 4px 16px rgba(0,0,0,0.15); white-space: nowrap; opacity: 0; transform: translateX(10px); transition: all 0.4s; }
     .wa-bubble.show { opacity: 1; transform: translateX(0); }
     .wa-btn { width: 54px; height: 54px; background: var(--wa); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(37,211,102,0.4); text-decoration: none; flex-shrink: 0; }
     .wa-btn svg { width: 28px; height: 28px; fill: #fff; }
 
-    /* Thumbnail gallery */
-    .thumb-strip { display: flex; gap: 8px; padding: 10px 16px; background: #fff; overflow-x: auto; border-bottom: 1px solid var(--border); -webkit-overflow-scrolling: touch; }
-    .thumb-strip::-webkit-scrollbar { display: none; }
-    .thumb-item { width: 64px; height: 64px; border-radius: 10px; object-fit: cover; border: 2.5px solid transparent; cursor: pointer; flex-shrink: 0; transition: border-color 0.18s, box-shadow 0.18s; background: #eee; }
-    .thumb-item.active { border-color: var(--dark); box-shadow: 0 0 0 1px var(--dark); }
-
-    /* ═══════════════════════════════════
+    /* ════════════════════════════════════════
        PANTALLA DETALLE — slide from right
-       ═══════════════════════════════════ */
-    .detail-screen { display: none; position: fixed; inset: 0; z-index: 9999; background: #F5F5F3; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-    .detail-screen.open { display: block; animation: slideRight 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+       Estructura flex: topbar + scroll + sticky-bar
+       ════════════════════════════════════════ */
+    .detail-screen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #FAFAF8;
+      flex-direction: column;
+    }
+    .detail-screen.open {
+      display: flex;
+      animation: slideRight 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
     @keyframes slideRight { from { transform: translateX(100%); } to { transform: translateX(0); } }
 
-    /* Top bar */
-    .detail-topbar { position: sticky; top: 0; background: #fff; border-bottom: 1px solid var(--border); padding: 13px 16px; display: flex; align-items: center; gap: 12px; z-index: 10; box-shadow: 0 1px 6px rgba(0,0,0,0.05); }
-    .detail-back { background: none; border: 1.5px solid var(--border); border-radius: 50%; width: 36px; height: 36px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--dark); flex-shrink: 0; line-height: 1; }
+    /* Topbar fijo en pantalla 2 */
+    .detail-topbar {
+      flex-shrink: 0;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 13px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+      z-index: 10;
+    }
+    .detail-back {
+      background: none;
+      border: 1.5px solid var(--border);
+      border-radius: 50%;
+      width: 36px; height: 36px;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--dark); flex-shrink: 0;
+    }
     .detail-topname { font-size: 15px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; flex: 1; }
 
-    /* Hero imagen */
-    .detail-hero-img { width: 100%; height: 290px; object-fit: cover; object-position: center; background: #EFEFED; display: block; }
+    /* Área scrolleable */
+    .detail-scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
 
-    /* Contenido */
-    .detail-body { padding: 20px 18px 40px; max-width: 480px; margin: 0 auto; }
+    /* ── BANNER SLIDER (dentro de detail) ── */
+    .vz-banner {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background: #111;
+      touch-action: pan-y;
+      user-select: none;
+    }
+    .vz-track {
+      display: flex;
+      transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+    }
+    .vz-slide {
+      min-width: 100%;
+      flex-shrink: 0;
+      position: relative;
+      height: clamp(300px, 80vw, 520px);
+    }
+    .vz-slide .slide-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.65s ease;
+    }
+    .vz-slide::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, transparent 55%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    /* Flechas slider */
+    .banner-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%); z-index: 20;
+      background: rgba(255,255,255,0.12); backdrop-filter: blur(6px);
+      border: 1.5px solid rgba(255,255,255,0.35); color: #fff;
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 22px; line-height: 1;
+      transition: background 0.2s;
+      -webkit-tap-highlight-color: transparent; outline: none; padding: 0;
+    }
+    .banner-arrow:hover { background: rgba(255,255,255,0.28); }
+    .arrow-prev { left: 12px; }
+    .arrow-next { right: 12px; }
+    /* Dots */
+    .banner-dots {
+      position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+      z-index: 20; display: flex; gap: 7px; align-items: center;
+    }
+    .banner-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: rgba(255,255,255,0.35); cursor: pointer;
+      transition: background 0.25s, width 0.25s, border-radius 0.25s;
+    }
+    .banner-dot.active { background: #fff; width: 22px; border-radius: 4px; }
+    /* Barra progreso */
+    .banner-progress {
+      position: absolute; bottom: 0; left: 0; height: 3px;
+      background: var(--gold-light); z-index: 20; width: 0%;
+      transition: width 0.1s linear;
+    }
 
-    .detail-name { font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.3px; margin-bottom: 3px; }
-    .detail-desc-txt { font-size: 13px; color: var(--gray); margin-bottom: 12px; }
-    .detail-precios { display: flex; align-items: baseline; gap: 12px; margin-bottom: 22px; }
-    .detail-precio-main { font-size: 24px; font-weight: 900; }
-    .detail-precio-main small { font-size: 12px; font-weight: 400; color: var(--gray); }
-    .detail-precio-2 { font-size: 13px; color: var(--gold); font-weight: 700; }
+    /* ── VZ DARK HERO ── */
+    .vz-hero {
+      background: var(--dark);
+      color: #fff;
+      padding: 36px 20px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .vz-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.22) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .vz-badge {
+      display: inline-block;
+      background: var(--gold);
+      color: #fff;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 6px 18px; border-radius: 20px;
+      margin-bottom: 18px;
+    }
+    .vz-headline {
+      font-family: 'Georgia', serif;
+      font-size: clamp(26px, 7vw, 42px);
+      font-weight: 700; line-height: 1.15;
+      margin-bottom: 12px; font-style: italic;
+      color: #fff; position: relative;
+    }
+    .vz-headline em { color: var(--gold); font-style: italic; }
+    .vz-sub {
+      font-size: 15px; color: #C0C0B8;
+      max-width: 320px; margin: 0 auto 28px;
+      position: relative;
+    }
+    /* Precios */
+    .vz-precios { margin-bottom: 26px; position: relative; }
+    .vz-par-label { display: block; font-size: 13px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+    .vz-precio-1val { font-size: 28px; font-weight: 700; color: var(--gold-light); }
+    .vz-cop { font-size: 16px; font-weight: 400; }
+    .vz-oferta-label { font-size: 14px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin: 10px 0 4px; }
+    .vz-oferta-label strong { color: var(--gold-light); }
+    .vz-precio-2val { font-size: 46px; font-weight: 900; color: var(--gold-light); line-height: 1; }
+    .vz-cop2 { font-size: 20px; font-weight: 400; }
+    /* Model dots */
+    .vz-model-dots { display: flex; justify-content: center; gap: 12px; margin-bottom: 26px; position: relative; }
+    .vz-model-dot {
+      width: 38px; height: 38px; border-radius: 50%;
+      background-size: cover; background-position: center;
+      border: 3px solid rgba(255,255,255,0.2);
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .vz-model-dot:hover { border-color: rgba(201,168,76,0.7); transform: scale(1.1); }
+    .vz-model-dot.active { border-color: var(--gold); transform: scale(1.18); box-shadow: 0 0 0 2px var(--gold); }
+    /* CTA button in hero */
+    .vz-btn-cta {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--wa); color: #fff;
+      font-size: 16px; font-weight: 700;
+      padding: 15px 32px; border-radius: 50px;
+      width: 100%; max-width: 320px;
+      border: none; cursor: pointer;
+      box-shadow: 0 6px 20px rgba(37,211,102,0.35);
+      transition: background 0.2s;
+      position: relative;
+    }
+    .vz-btn-cta:active { background: var(--wa-dark); }
 
-    /* Selector de modelo (color) */
+    /* ── VZ FORM SECTION ── */
+    .vz-form-section {
+      background: #FAFAF8;
+      padding: 40px 20px 32px;
+      border-top: 3px solid var(--gold);
+    }
+    .vz-form-title { text-align: center; font-size: 22px; font-weight: 700; margin-bottom: 6px; }
+    .vz-form-sub { text-align: center; color: var(--gray); font-size: 13px; margin-bottom: 24px; }
+    .vz-form-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 24px 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.09);
+      border: 1px solid #E8E4DC;
+      max-width: 460px;
+      margin: 0 auto;
+    }
+    /* Resumen pedido */
+    .vz-resumen {
+      background: #F4F0E8;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 22px;
+    }
+    .vz-resumen-titulo { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--gray); margin-bottom: 8px; }
+    .vz-resumen-linea { display: flex; justify-content: space-between; font-size: 14px; color: var(--dark); margin-bottom: 4px; }
+    .vz-resumen-total {
+      border-top: 1px solid #DDD8CE;
+      padding-top: 8px; margin-top: 8px;
+      font-weight: 700; font-size: 16px;
+    }
+    .vz-resumen-total span:last-child { color: var(--gold); }
+
+    /* Grupos de form (reutilizados) */
     .detail-group { margin-bottom: 20px; }
     .detail-group-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray); margin-bottom: 10px; }
-    .color-thumbs { display: flex; gap: 10px; }
-    .color-thumb { flex-shrink: 0; text-align: center; cursor: pointer; }
-    .color-thumb-img { width: 66px; height: 66px; border-radius: 12px; object-fit: cover; border: 3px solid transparent; transition: border-color 0.18s, box-shadow 0.18s; background: #eee; }
-    .color-thumb.active .color-thumb-img { border-color: var(--dark); box-shadow: 0 0 0 1px var(--dark); }
-    .color-thumb-label { font-size: 9px; font-weight: 700; text-transform: uppercase; color: var(--gray); margin-top: 5px; letter-spacing: 0.3px; }
-    .color-thumb.active .color-thumb-label { color: var(--dark); }
-
-    .detail-divider { height: 1px; background: var(--border); margin: 20px 0; }
 
     /* Cantidad */
     .cantidad-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -162,41 +339,76 @@
     .pago-radio-dot { width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 50%; margin-left: auto; flex-shrink: 0; transition: all 0.18s; }
     .pago-option input:checked + .pago-option-label .pago-radio-dot { border-color: var(--dark); background: var(--dark); }
 
-    /* Campos de envío */
+    /* Divisor */
+    .detail-divider { height: 1px; background: var(--border); margin: 20px 0; }
+
+    /* Campos envío */
     .form-group { margin-bottom: 12px; }
     .form-group label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray); margin-bottom: 5px; }
     .form-group input { width: 100%; border: 2px solid var(--border); border-radius: 10px; padding: 13px 14px; font-size: 15px; font-family: inherit; background: #fff; -webkit-appearance: none; transition: border-color 0.18s; }
     .form-group input:focus { outline: none; border-color: var(--dark); }
 
-    /* Trust badges */
-    .detail-trust { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
-    .detail-trust span { font-size: 11px; background: #fff; border-radius: 20px; padding: 5px 11px; color: var(--gray); border: 1px solid var(--border); }
+    /* Trust */
+    .detail-trust { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0; }
+    .detail-trust span { font-size: 11px; background: #F4F0E8; border-radius: 20px; padding: 5px 11px; color: var(--gray); }
 
-    /* Botón WhatsApp */
-    .btn-submit { width: 100%; background: var(--wa); color: #fff; border: none; border-radius: 14px; padding: 17px; font-size: 16px; font-weight: 800; cursor: pointer; letter-spacing: 0.3px; display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.2s; }
-    .btn-submit:hover { background: var(--wa-dark); }
+    /* Botón pedido */
+    .btn-pedido {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%;
+      background: var(--wa); color: #fff;
+      font-size: 17px; font-weight: 700;
+      padding: 17px 20px; border-radius: 50px;
+      border: none; cursor: pointer;
+      box-shadow: 0 6px 20px rgba(37,211,102,0.35);
+      transition: background 0.2s;
+      font-family: inherit;
+    }
+    .btn-pedido:active { background: var(--wa-dark); }
+    .form-nota { text-align: center; font-size: 12px; color: #aaa; margin-top: 12px; }
+
+    /* ── STICKY BOTTOM BAR (dentro de detail-screen) ── */
+    .vz-sticky-bar {
+      flex-shrink: 0;
+      background: var(--dark);
+      color: #fff;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.25);
+    }
+    .vz-sticky-info { display: flex; flex-direction: column; }
+    .vz-sticky-name { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+    .vz-sticky-price { font-size: 18px; font-weight: 900; color: var(--gold); }
+    .vz-sticky-btn {
+      background: var(--wa); color: #fff;
+      border: none; border-radius: 50px;
+      padding: 12px 22px; font-size: 14px; font-weight: 800;
+      cursor: pointer; white-space: nowrap; flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .vz-sticky-btn:active { background: var(--wa-dark); }
 
     @media (max-width: 360px) {
       .hero h1 { font-size: 23px; }
       .grid { gap: 9px; }
       .product-name { font-size: 12px; }
-      .color-thumb-img { width: 56px; height: 56px; }
     }
   </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
+<!-- ── SCREEN 1 ── -->
 <div class="topbar">
   Envío a todo Colombia &nbsp;·&nbsp; <strong>Pagas cuando recibes</strong> &nbsp;·&nbsp; 3–4 días
 </div>
 
-<!-- HEADER -->
 <header>
   <div class="logo">VZ <span>Footwear</span></div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-tag">Colección Premium · Eco Cuero</div>
   <h1>El estilo que buscabas<br><em>ya llegó.</em></h1>
@@ -214,7 +426,6 @@
   </div>
 </section>
 
-<!-- CATÁLOGO -->
 <section class="catalogo">
   <div class="section-label">Elige tu modelo</div>
   <div class="grid">
@@ -223,7 +434,7 @@
       <img class="product-img" src="vz-sierra.jpg" alt="VZ Sierra" loading="lazy" />
       <div class="product-info">
         <div class="product-name">VZ Sierra</div>
-        <div class="product-desc">Mostaza · Eco cuero</div>
+        <div class="product-desc">Eco cuero · 4 colores</div>
         <div class="product-price-row">
           <div class="price-1par">$109.900 <small>COP</small></div>
           <div class="price-2par">2 pares $199.900 COP</div>
@@ -236,7 +447,7 @@
       <img class="product-img" src="vz-ember.jpg" alt="VZ Ember" loading="lazy" />
       <div class="product-info">
         <div class="product-name">VZ Ember</div>
-        <div class="product-desc">Café oscuro · Eco cuero</div>
+        <div class="product-desc">Eco cuero · 5 colores</div>
         <div class="product-price-row">
           <div class="price-1par">$109.900 <small>COP</small></div>
           <div class="price-2par">2 pares $199.900 COP</div>
@@ -249,7 +460,7 @@
       <img class="product-img" src="vz-bruma.jpg" alt="VZ Bruma" loading="lazy" />
       <div class="product-info">
         <div class="product-name">VZ Bruma</div>
-        <div class="product-desc">Beige · Eco cuero</div>
+        <div class="product-desc">Eco cuero · 4 colores</div>
         <div class="product-price-row">
           <div class="price-1par">$109.900 <small>COP</small></div>
           <div class="price-2par">2 pares $199.900 COP</div>
@@ -262,7 +473,7 @@
       <img class="product-img" src="vz-ranger.jpg" alt="VZ Ranger" loading="lazy" />
       <div class="product-info">
         <div class="product-name">VZ Ranger</div>
-        <div class="product-desc">Café · Eco cuero</div>
+        <div class="product-desc">Eco cuero · 3 colores</div>
         <div class="product-price-row">
           <div class="price-1par">$109.900 <small>COP</small></div>
           <div class="price-2par">2 pares $199.900 COP</div>
@@ -274,7 +485,6 @@
   </div>
 </section>
 
-<!-- OFERTA 2 PARES -->
 <div class="oferta-2">
   <div class="tag">Oferta especial</div>
   <h3>Lleva 2 pares y ahorra</h3>
@@ -283,7 +493,6 @@
   <button class="btn-oferta" onclick="abrirDetalle(0, true)">Ver oferta 2 pares</button>
 </div>
 
-<!-- WA FLOTANTE -->
 <div class="wa-float">
   <div class="wa-bubble" id="waBubble">¿Tienes dudas? ¡Escríbenos!</div>
   <a class="wa-btn" href="https://wa.me/573332826196?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20las%20botas%20VZ%20%F0%9F%91%9F" target="_blank">
@@ -291,273 +500,418 @@
   </a>
 </div>
 
-<!-- ═══════════════════════════════════
-     PANTALLA DETALLE PRODUCTO
-     ═══════════════════════════════════ -->
+
+<!-- ══════════════════════════════════════════════
+     SCREEN 2 — DETALLE PRODUCTO
+     Estructura: flex col → [topbar] [scroll] [sticky-bar]
+     ══════════════════════════════════════════════ -->
 <div class="detail-screen" id="detailScreen">
 
-  <!-- Barra superior -->
+  <!-- Top bar (fijo) -->
   <div class="detail-topbar">
     <button class="detail-back" onclick="cerrarDetalle()">&#8592;</button>
     <div class="detail-topname" id="detail-topname">VZ Sierra</div>
   </div>
 
-  <!-- Imagen principal -->
-  <img class="detail-hero-img" id="detail-hero-img" src="" alt="" />
+  <!-- Área scrolleable -->
+  <div class="detail-scroll" id="detailScroll">
 
-  <!-- Slider de fotos (miniaturas) -->
-  <div class="thumb-strip" id="thumbStrip"></div>
-
-  <!-- Contenido -->
-  <div class="detail-body">
-
-    <div class="detail-name" id="detail-name">VZ Sierra</div>
-    <div class="detail-desc-txt" id="detail-desc-txt">Mostaza · Eco cuero</div>
-    <div class="detail-precios">
-      <div class="detail-precio-main">$109.900 <small>COP</small></div>
-      <div class="detail-precio-2">· 2 pares $199.900</div>
+    <!-- BANNER SLIDER -->
+    <div class="vz-banner" id="vzBanner">
+      <div class="vz-track" id="vzTrack"></div>
+      <button class="banner-arrow arrow-prev" onclick="vzPrev()">&#8249;</button>
+      <button class="banner-arrow arrow-next" onclick="vzNext()">&#8250;</button>
+      <div class="banner-dots" id="vzDots"></div>
+      <div class="banner-progress" id="vzProgress"></div>
     </div>
 
-    <!-- Elige modelo -->
-    <div class="detail-group">
-      <div class="detail-group-label">Elige tu modelo</div>
-      <div class="color-thumbs">
-        <div class="color-thumb active" onclick="cambiarModelo(0)" data-idx="0">
-          <img class="color-thumb-img" src="vz-sierra.jpg" alt="Sierra" />
-          <div class="color-thumb-label">Sierra</div>
-        </div>
-        <div class="color-thumb" onclick="cambiarModelo(1)" data-idx="1">
-          <img class="color-thumb-img" src="vz-ember.jpg" alt="Ember" />
-          <div class="color-thumb-label">Ember</div>
-        </div>
-        <div class="color-thumb" onclick="cambiarModelo(2)" data-idx="2">
-          <img class="color-thumb-img" src="vz-bruma.jpg" alt="Bruma" />
-          <div class="color-thumb-label">Bruma</div>
-        </div>
-        <div class="color-thumb" onclick="cambiarModelo(3)" data-idx="3">
-          <img class="color-thumb-img" src="vz-ranger.jpg" alt="Ranger" />
-          <div class="color-thumb-label">Ranger</div>
-        </div>
+    <!-- VZ DARK HERO -->
+    <section class="vz-hero">
+      <div class="vz-badge" id="vz-badge">VZ SIERRA — ECO CUERO</div>
+      <h2 class="vz-headline" id="vz-headline">Tu modelo, <em>tu estilo.</em></h2>
+      <p class="vz-sub" id="vz-sub">Eco cuero premium. 4 modelos. Llegan a tu puerta.</p>
+
+      <div class="vz-precios">
+        <span class="vz-par-label">1 par</span>
+        <span class="vz-precio-1val">$109.900</span>
+        <span class="vz-cop">COP</span>
+        <div class="vz-oferta-label">Oferta especial — <strong>2 pares</strong></div>
+        <div class="vz-precio-2val">$199.900 <span class="vz-cop2">COP</span></div>
       </div>
-    </div>
 
-    <div class="detail-divider"></div>
+      <!-- 4 puntos de modelo -->
+      <div class="vz-model-dots" id="vz-model-dots"></div>
 
-    <!-- Cantidad -->
-    <div class="detail-group">
-      <div class="detail-group-label">Cantidad</div>
-      <div class="cantidad-group">
-        <div class="cantidad-option">
-          <input type="radio" name="d-cant" id="dc1" value="1" checked>
-          <label class="cantidad-label" for="dc1">
-            <span class="cant-num">1 par</span>
-            <span class="cant-price">$109.900</span>
-          </label>
+      <button class="vz-btn-cta" onclick="document.getElementById('vzForm').scrollIntoView({behavior:'smooth'})">
+        Ver opciones y pedir &nbsp;↓
+      </button>
+    </section>
+
+    <!-- FORMULARIO (estilo botas) -->
+    <section class="vz-form-section" id="vzForm">
+      <div class="vz-form-title">Completa tu pedido</div>
+      <div class="vz-form-sub">Datos de entrega — llega en 3-4 días a tu puerta</div>
+
+      <div class="vz-form-card">
+
+        <!-- Resumen -->
+        <div class="vz-resumen">
+          <div class="vz-resumen-titulo">Resumen del pedido</div>
+          <div class="vz-resumen-linea">
+            <span id="resumen-modelo">VZ Sierra — 1 par</span>
+            <span id="resumen-precio">$109.900</span>
+          </div>
+          <div class="vz-resumen-linea">
+            <span>Envío</span>
+            <span style="color:var(--wa);font-weight:700">Gratis</span>
+          </div>
+          <div class="vz-resumen-linea vz-resumen-total">
+            <span>Total</span>
+            <span id="resumen-total">$109.900 COP</span>
+          </div>
         </div>
-        <div class="cantidad-option">
-          <input type="radio" name="d-cant" id="dc2" value="2">
-          <label class="cantidad-label" for="dc2">
-            <span class="cant-num">2 pares</span>
-            <span class="cant-price">$199.900</span>
-            <span class="cant-badge">AHORRA $20K</span>
-          </label>
-        </div>
-      </div>
-    </div>
 
-    <!-- Talla -->
-    <div class="detail-group">
-      <div class="detail-group-label">Talla</div>
-      <select class="detail-select" id="d-talla">
-        <option value="">Selecciona tu talla</option>
-        <option>35</option><option>36</option><option>37</option><option>38</option>
-        <option>39</option><option>40</option><option>41</option><option>42</option>
-        <option>43</option><option>44</option>
-      </select>
-    </div>
-
-    <!-- Método de pago -->
-    <div class="detail-group">
-      <div class="detail-group-label">Método de pago</div>
-      <div class="pago-selector">
-        <div class="pago-option">
-          <input type="radio" name="d-pago" id="dp1" value="Contraentrega" checked>
-          <label class="pago-option-label" for="dp1">
-            <span class="pago-ico">📦</span>
-            <div class="pago-text">
-              <strong>Contraentrega</strong>
-              <span>Pagas cuando recibes el paquete</span>
+        <!-- Cantidad -->
+        <div class="detail-group">
+          <div class="detail-group-label">Cantidad</div>
+          <div class="cantidad-group">
+            <div class="cantidad-option">
+              <input type="radio" name="d-cant" id="dc1" value="1" checked>
+              <label class="cantidad-label" for="dc1">
+                <span class="cant-num">1 par</span>
+                <span class="cant-price">$109.900</span>
+              </label>
             </div>
-            <div class="pago-radio-dot"></div>
-          </label>
-        </div>
-        <div class="pago-option">
-          <input type="radio" name="d-pago" id="dp2" value="Transferencia Nequi/Bancolombia">
-          <label class="pago-option-label" for="dp2">
-            <span class="pago-ico">📲</span>
-            <div class="pago-text">
-              <strong>Transferencia</strong>
-              <span>Nequi · Bancolombia · Daviplata</span>
+            <div class="cantidad-option">
+              <input type="radio" name="d-cant" id="dc2" value="2">
+              <label class="cantidad-label" for="dc2">
+                <span class="cant-num">2 pares</span>
+                <span class="cant-price">$199.900</span>
+                <span class="cant-badge">AHORRA $20K</span>
+              </label>
             </div>
-            <div class="pago-radio-dot"></div>
-          </label>
+          </div>
         </div>
-        <div class="pago-option">
-          <input type="radio" name="d-pago" id="dp3" value="Cuotas Addi">
-          <label class="pago-option-label" for="dp3">
-            <span class="pago-ico">🔄</span>
-            <div class="pago-text">
-              <strong>Cuotas — Addi</strong>
-              <span>Paga en cuotas sin tarjeta</span>
+
+        <!-- Talla -->
+        <div class="detail-group">
+          <div class="detail-group-label">Talla</div>
+          <select class="detail-select" id="d-talla">
+            <option value="">Selecciona tu talla</option>
+            <option>35</option><option>36</option><option>37</option><option>38</option>
+            <option>39</option><option>40</option><option>41</option><option>42</option>
+            <option>43</option><option>44</option>
+          </select>
+        </div>
+
+        <!-- Método de pago -->
+        <div class="detail-group">
+          <div class="detail-group-label">Método de pago</div>
+          <div class="pago-selector">
+            <div class="pago-option">
+              <input type="radio" name="d-pago" id="dp1" value="Contraentrega" checked>
+              <label class="pago-option-label" for="dp1">
+                <span class="pago-ico">📦</span>
+                <div class="pago-text"><strong>Contraentrega</strong><span>Pagas cuando recibes el paquete</span></div>
+                <div class="pago-radio-dot"></div>
+              </label>
             </div>
-            <div class="pago-radio-dot"></div>
-          </label>
-        </div>
-        <div class="pago-option">
-          <input type="radio" name="d-pago" id="dp4" value="Tarjeta Bold (crédito/débito/PSE)">
-          <label class="pago-option-label" for="dp4">
-            <span class="pago-ico">💳</span>
-            <div class="pago-text">
-              <strong>Tarjeta Bold</strong>
-              <span>Crédito · Débito · PSE</span>
+            <div class="pago-option">
+              <input type="radio" name="d-pago" id="dp2" value="Transferencia Nequi/Bancolombia">
+              <label class="pago-option-label" for="dp2">
+                <span class="pago-ico">📲</span>
+                <div class="pago-text"><strong>Transferencia</strong><span>Nequi · Bancolombia · Daviplata</span></div>
+                <div class="pago-radio-dot"></div>
+              </label>
             </div>
-            <div class="pago-radio-dot"></div>
-          </label>
+            <div class="pago-option">
+              <input type="radio" name="d-pago" id="dp3" value="Cuotas Addi">
+              <label class="pago-option-label" for="dp3">
+                <span class="pago-ico">🔄</span>
+                <div class="pago-text"><strong>Cuotas — Addi</strong><span>Paga en cuotas sin tarjeta</span></div>
+                <div class="pago-radio-dot"></div>
+              </label>
+            </div>
+            <div class="pago-option">
+              <input type="radio" name="d-pago" id="dp4" value="Tarjeta Bold (crédito/débito/PSE)">
+              <label class="pago-option-label" for="dp4">
+                <span class="pago-ico">💳</span>
+                <div class="pago-text"><strong>Tarjeta Bold</strong><span>Crédito · Débito · PSE</span></div>
+                <div class="pago-radio-dot"></div>
+              </label>
+            </div>
+          </div>
         </div>
+
+        <div class="detail-divider"></div>
+
+        <!-- Datos envío -->
+        <div class="detail-group">
+          <div class="detail-group-label">Tus datos de envío</div>
+          <div class="form-group">
+            <label>Nombre completo</label>
+            <input type="text" id="d-nombre" placeholder="Tu nombre completo" autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label>Celular</label>
+            <input type="tel" id="d-celular" placeholder="300 000 0000" maxlength="10" autocomplete="tel" />
+          </div>
+          <div class="form-group">
+            <label>Ciudad</label>
+            <input type="text" id="d-ciudad" placeholder="Ciudad de entrega" autocomplete="address-level2" />
+          </div>
+          <div class="form-group">
+            <label>Dirección completa</label>
+            <input type="text" id="d-direccion" placeholder="Calle, carrera, barrio, apto" autocomplete="street-address" />
+          </div>
+        </div>
+
+        <!-- Trust -->
+        <div class="detail-trust">
+          <span>✅ Pagas cuando recibes</span>
+          <span>🚚 Envío 3–4 días</span>
+          <span>⭐ Eco cuero premium</span>
+          <span>🇨🇴 Todo Colombia</span>
+        </div>
+
+        <!-- Botón principal -->
+        <button class="btn-pedido" onclick="confirmarPedido()">
+          <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:#fff;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Confirmar pedido por WhatsApp
+        </button>
+        <div class="form-nota">Al confirmar se abrirá WhatsApp con tu pedido listo.</div>
+
       </div>
+    </section>
+
+  </div><!-- /detail-scroll -->
+
+  <!-- STICKY BOTTOM BAR -->
+  <div class="vz-sticky-bar">
+    <div class="vz-sticky-info">
+      <div class="vz-sticky-name" id="vz-sticky-name">VZ Sierra</div>
+      <div class="vz-sticky-price" id="vz-sticky-price">$109.900 COP</div>
     </div>
-
-    <div class="detail-divider"></div>
-
-    <!-- Datos de envío -->
-    <div class="detail-group">
-      <div class="detail-group-label">Tus datos de envío</div>
-      <div class="form-group">
-        <label>Nombre completo</label>
-        <input type="text" id="d-nombre" placeholder="Tu nombre completo" autocomplete="name" />
-      </div>
-      <div class="form-group">
-        <label>Celular</label>
-        <input type="tel" id="d-celular" placeholder="300 000 0000" maxlength="10" autocomplete="tel" />
-      </div>
-      <div class="form-group">
-        <label>Ciudad</label>
-        <input type="text" id="d-ciudad" placeholder="Ciudad de entrega" autocomplete="address-level2" />
-      </div>
-      <div class="form-group">
-        <label>Dirección completa</label>
-        <input type="text" id="d-direccion" placeholder="Calle, carrera, barrio, apto" autocomplete="street-address" />
-      </div>
-    </div>
-
-    <!-- Trust -->
-    <div class="detail-trust">
-      <span>✅ Pagas cuando recibes</span>
-      <span>🚚 Envío 3–4 días</span>
-      <span>⭐ Eco cuero premium</span>
-      <span>🇨🇴 Todo Colombia</span>
-    </div>
-
-    <!-- Botón confirmar -->
-    <button class="btn-submit" onclick="confirmarPedido()">
-      <svg viewBox="0 0 24 24" style="width:20px;height:20px;fill:#fff;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Confirmar pedido por WhatsApp
-    </button>
-
+    <button class="vz-sticky-btn" onclick="confirmarPedido()">Pedir ahora ⚡</button>
   </div>
-</div>
+
+</div><!-- /detail-screen -->
+
 
 <script>
-  setTimeout(function() {
-    document.getElementById('waBubble').classList.add('show');
-  }, 2500);
+  // WA bubble
+  setTimeout(function() { document.getElementById('waBubble').classList.add('show'); }, 2500);
 
+  // ── PRODUCTOS ──
   var productos = [
     {
       nombre: 'VZ Sierra',
-      imgs: ['vz-sierra.jpg', 'vz-sierra-2.jpg', 'vz-sierra-3.jpg', 'vz-sierra-4.jpg'],
-      desc: 'Mostaza · Eco cuero'
+      imgs: ['vz-sierra.jpg','vz-sierra-2.jpg','vz-sierra-3.jpg','vz-sierra-4.jpg'],
+      headline: 'Tu modelo,<br><em>tu estilo.</em>',
+      sub: 'Eco cuero premium. Diseño versátil. Llega a tu puerta.'
     },
     {
       nombre: 'VZ Ember',
-      imgs: ['vz-ember.jpg', 'vz-ember-2.jpg', 'vz-ember-3.jpg', 'vz-ember-4.jpg', 'vz-ember-5.jpg'],
-      desc: 'Varios colores · Eco cuero'
+      imgs: ['vz-ember.jpg','vz-ember-2.jpg','vz-ember-3.jpg','vz-ember-4.jpg','vz-ember-5.jpg'],
+      headline: 'Actitud que<br><em>se nota.</em>',
+      sub: 'Distintos. Atrevidos. Con calidad que dura temporadas.'
     },
     {
       nombre: 'VZ Bruma',
-      imgs: ['vz-bruma.jpg', 'vz-bruma-2.jpg', 'vz-bruma-3.jpg', 'vz-bruma-4.jpg'],
-      desc: 'Varios colores · Eco cuero'
+      imgs: ['vz-bruma.jpg','vz-bruma-2.jpg','vz-bruma-3.jpg','vz-bruma-4.jpg'],
+      headline: 'Suave, elegante,<br><em>tuyo.</em>',
+      sub: 'Delicadeza y carácter. El modelo que más enamora.'
     },
     {
       nombre: 'VZ Ranger',
-      imgs: ['vz-ranger.jpg', 'vz-ranger-2.jpg', 'vz-ranger-3.jpg'],
-      desc: 'Varios colores · Eco cuero'
+      imgs: ['vz-ranger.jpg','vz-ranger-2.jpg','vz-ranger-3.jpg'],
+      headline: 'Para los que<br><em>van lejos.</em>',
+      sub: 'Diseño robusto con hebilla. Comodidad sin límites.'
     }
   ];
   var modeloActual = 0;
 
-  function abrirDetalle(idx, dos) {
-    modeloActual = idx;
-    actualizarDetalle(idx);
-    document.getElementById('dc1').checked = true;
-    if (dos) document.getElementById('dc2').checked = true;
-    document.getElementById('d-talla').value = '';
-    document.getElementById('dp1').checked = true;
-    document.getElementById('d-nombre').value = '';
-    document.getElementById('d-celular').value = '';
-    document.getElementById('d-ciudad').value = '';
-    document.getElementById('d-direccion').value = '';
-    var screen = document.getElementById('detailScreen');
-    screen.scrollTop = 0;
-    screen.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    history.pushState({ vzDetail: idx }, '', '#' + productos[idx].nombre.toLowerCase().replace(/\s+/g, '-'));
-    if (typeof fbq !== 'undefined') fbq('track', 'ViewContent', { content_name: productos[idx].nombre });
+  // ── VZ SLIDER ──
+  var vzCurrent  = 0;
+  var vzSlides   = [];
+  var vzInterval = null;
+  var vzTouchX   = 0;
+
+  function vzBuildSlider(imgs) {
+    var track = document.getElementById('vzTrack');
+    var dots  = document.getElementById('vzDots');
+    track.innerHTML = '';
+    dots.innerHTML  = '';
+    vzSlides  = imgs;
+    vzCurrent = 0;
+
+    imgs.forEach(function(src, i) {
+      var slide = document.createElement('div');
+      slide.className = 'vz-slide';
+      slide.innerHTML = '<div class="slide-bg" style="background-image:url(\'' + src + '\')"></div>';
+      track.appendChild(slide);
+
+      var dot = document.createElement('div');
+      dot.className = 'banner-dot' + (i === 0 ? ' active' : '');
+      (function(idx){ dot.addEventListener('click', function(){ vzGo(idx); vzPlay(); }); })(i);
+      dots.appendChild(dot);
+    });
+
+    track.style.transition = 'none';
+    track.style.transform  = 'translateX(0)';
   }
 
+  function vzGo(n) {
+    vzCurrent = n;
+    var track = document.getElementById('vzTrack');
+    track.style.transition = 'transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    track.style.transform  = 'translateX(-' + n * 100 + '%)';
+    document.querySelectorAll('#vzDots .banner-dot').forEach(function(d, i){
+      d.classList.toggle('active', i === n);
+    });
+  }
+
+  function vzPrev() { vzGo((vzCurrent - 1 + vzSlides.length) % vzSlides.length); }
+  function vzNext() { vzGo((vzCurrent + 1) % vzSlides.length); }
+
+  function vzStartProgress() {
+    var bar = document.getElementById('vzProgress');
+    if (!bar) return;
+    bar.style.transition = 'none';
+    bar.style.width = '0%';
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        bar.style.transition = 'width 4s linear';
+        bar.style.width = '100%';
+      });
+    });
+  }
+
+  function vzPlay() {
+    vzStop();
+    vzStartProgress();
+    vzInterval = setInterval(function(){
+      vzNext();
+      vzStartProgress();
+    }, 4000);
+  }
+
+  function vzStop() {
+    if (vzInterval) { clearInterval(vzInterval); vzInterval = null; }
+    var bar = document.getElementById('vzProgress');
+    if (bar) { bar.style.transition = 'none'; bar.style.width = '0%'; }
+  }
+
+  // Touch/swipe en el slider
+  (function() {
+    var banner = document.getElementById('vzBanner');
+    banner.addEventListener('touchstart', function(e){ vzTouchX = e.touches[0].clientX; vzStop(); }, {passive:true});
+    banner.addEventListener('touchend', function(e){
+      var dx = e.changedTouches[0].clientX - vzTouchX;
+      if (Math.abs(dx) > 40) { dx < 0 ? vzNext() : vzPrev(); }
+      vzPlay();
+    }, {passive:true});
+    banner.addEventListener('mouseenter', vzStop);
+    banner.addEventListener('mouseleave', vzPlay);
+  })();
+
+  // ── MODEL DOTS ──
+  function buildModelDots(activeIdx) {
+    var container = document.getElementById('vz-model-dots');
+    container.innerHTML = '';
+    productos.forEach(function(p, i) {
+      var dot = document.createElement('div');
+      dot.className = 'vz-model-dot' + (i === activeIdx ? ' active' : '');
+      dot.style.backgroundImage = 'url(' + p.imgs[0] + ')';
+      dot.title = p.nombre;
+      (function(idx){ dot.addEventListener('click', function(){ cambiarModelo(idx); }); })(i);
+      container.appendChild(dot);
+    });
+  }
+
+  // ── RESUMEN (actualiza al cambiar cantidad) ──
+  function actualizarResumen() {
+    var cant = document.querySelector('input[name="d-cant"]:checked');
+    if (!cant) return;
+    var p     = productos[modeloActual];
+    var n     = parseInt(cant.value);
+    var precio = n === 2 ? '$199.900' : '$109.900';
+    document.getElementById('resumen-modelo').textContent = p.nombre + ' × ' + n;
+    document.getElementById('resumen-precio').textContent = precio;
+    document.getElementById('resumen-total').textContent  = precio + ' COP';
+    document.getElementById('vz-sticky-price').textContent = precio + ' COP';
+  }
+  document.getElementById('dc1').addEventListener('change', actualizarResumen);
+  document.getElementById('dc2').addEventListener('change', actualizarResumen);
+
+  // ── ACTUALIZAR DETALLE ──
   function actualizarDetalle(idx) {
     var p = productos[idx];
     modeloActual = idx;
-    // Imagen principal = primera foto del modelo
-    document.getElementById('detail-hero-img').src = p.imgs[0];
-    document.getElementById('detail-hero-img').alt = p.nombre;
-    document.getElementById('detail-name').textContent = p.nombre;
+
     document.getElementById('detail-topname').textContent = p.nombre;
-    document.getElementById('detail-desc-txt').textContent = p.desc;
-    // Marcar miniatura de modelo activo
-    document.querySelectorAll('.color-thumb').forEach(function(el) {
-      el.classList.toggle('active', parseInt(el.dataset.idx) === idx);
-    });
-    // Construir slider de fotos del modelo
-    var strip = document.getElementById('thumbStrip');
-    strip.innerHTML = '';
-    p.imgs.forEach(function(src, i) {
-      var img = document.createElement('img');
-      img.className = 'thumb-item' + (i === 0 ? ' active' : '');
-      img.src = src;
-      img.alt = p.nombre + ' foto ' + (i + 1);
-      img.dataset.src = src;
-      img.addEventListener('click', function() { selThumb(src, this); });
-      strip.appendChild(img);
-    });
+    document.getElementById('vz-badge').textContent = p.nombre.toUpperCase() + ' — ECO CUERO';
+    document.getElementById('vz-headline').innerHTML = p.headline;
+    document.getElementById('vz-sub').textContent   = p.sub;
+    document.getElementById('vz-sticky-name').textContent = p.nombre;
+
+    buildModelDots(idx);
+    vzBuildSlider(p.imgs);
+    vzPlay();
+    actualizarResumen();
   }
 
-  function selThumb(src, el) {
-    document.getElementById('detail-hero-img').src = src;
-    document.querySelectorAll('.thumb-item').forEach(function(t) { t.classList.remove('active'); });
-    el.classList.add('active');
+  // ── ABRIR DETALLE ──
+  function abrirDetalle(idx, dos) {
+    modeloActual = idx;
+    actualizarDetalle(idx);
+
+    document.getElementById('dc1').checked = true;
+    if (dos) document.getElementById('dc2').checked = true;
+    document.getElementById('d-talla').value    = '';
+    document.getElementById('dp1').checked      = true;
+    document.getElementById('d-nombre').value   = '';
+    document.getElementById('d-celular').value  = '';
+    document.getElementById('d-ciudad').value   = '';
+    document.getElementById('d-direccion').value = '';
+
+    document.getElementById('detailScroll').scrollTop = 0;
+    document.getElementById('detailScreen').classList.add('open');
+    document.body.style.overflow = 'hidden';
+
+    history.pushState({ vzDetail: idx }, '', '#' + productos[idx].nombre.toLowerCase().replace(/\s+/g, '-'));
+    actualizarResumen();
+
+    if (typeof fbq !== 'undefined') fbq('track', 'ViewContent', { content_name: productos[idx].nombre });
   }
 
+  // ── CAMBIAR MODELO (desde los dots) ──
   function cambiarModelo(idx) {
     actualizarDetalle(idx);
+    document.getElementById('detailScroll').scrollTop = 0;
+    history.replaceState({ vzDetail: idx }, '', '#' + productos[idx].nombre.toLowerCase().replace(/\s+/g, '-'));
+    if (typeof fbq !== 'undefined') fbq('track', 'ViewContent', { content_name: productos[idx].nombre });
   }
 
+  // ── CERRAR DETALLE ──
   function cerrarDetalle() {
+    vzStop();
     document.getElementById('detailScreen').classList.remove('open');
     document.body.style.overflow = '';
     history.replaceState(null, '', location.pathname + location.search);
   }
 
+  // Botón retroceso físico del celular
+  window.addEventListener('popstate', function() {
+    var screen = document.getElementById('detailScreen');
+    if (screen.classList.contains('open')) {
+      vzStop();
+      screen.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+
+  // ── CONFIRMAR PEDIDO ──
   function confirmarPedido() {
     var talla    = document.getElementById('d-talla').value;
     var nombre   = document.getElementById('d-nombre').value.trim();
@@ -567,13 +921,13 @@
     var cant     = document.querySelector('input[name="d-cant"]:checked').value;
     var pago     = document.querySelector('input[name="d-pago"]:checked').value;
 
-    if (!talla)             { alert('Por favor selecciona tu talla'); return; }
-    if (!nombre)            { alert('Por favor ingresa tu nombre'); return; }
-    if (celular.length < 10){ alert('Por favor ingresa un celular válido (10 dígitos)'); return; }
-    if (!ciudad)            { alert('Por favor ingresa tu ciudad'); return; }
-    if (!direccion)         { alert('Por favor ingresa tu dirección'); return; }
+    if (!talla)              { alert('Por favor selecciona tu talla'); return; }
+    if (!nombre)             { alert('Por favor ingresa tu nombre'); return; }
+    if (celular.length < 10) { alert('Por favor ingresa un celular válido (10 dígitos)'); return; }
+    if (!ciudad)             { alert('Por favor ingresa tu ciudad'); return; }
+    if (!direccion)          { alert('Por favor ingresa tu dirección'); return; }
 
-    var p = productos[modeloActual];
+    var p      = productos[modeloActual];
     var precio = cant == 2 ? '$199.900' : '$109.900';
 
     var msg = '🛍️ NUEVO PEDIDO — VZ Footwear\n'
@@ -600,15 +954,6 @@
 
     window.open('https://wa.me/573332826196?text=' + encodeURIComponent(msg), '_blank');
   }
-
-  // Botón retroceso del celular/navegador cierra el detalle
-  window.addEventListener('popstate', function() {
-    var screen = document.getElementById('detailScreen');
-    if (screen.classList.contains('open')) {
-      screen.classList.remove('open');
-      document.body.style.overflow = '';
-    }
-  });
 </script>
 
 </body>
