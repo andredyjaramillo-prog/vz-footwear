@@ -365,6 +365,7 @@
     .detail-group.error .detail-select { border-color: #C0392B; }
     .select-wrap { position: relative; }
     .select-wrap::after { content: '▾'; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--gold); font-size: 16px; pointer-events: none; }
+    .vz-par-header { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gray); background: #F4F0E8; border-radius: 8px; padding: 8px 12px; margin: 4px 0 14px; }
 
     /* Trust */
     .detail-trust { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0; }
@@ -643,7 +644,21 @@
           </div>
         </div>
 
-        <!-- Talla -->
+        <!-- Par 1 header (solo visible con 2 pares) -->
+        <div class="vz-par-header" id="par1-header" style="display:none">Par 1 — <span id="par1-nombre"></span></div>
+
+        <!-- Color par 1 -->
+        <div class="form-group" id="fg-color1">
+          <label>Color <span>*</span></label>
+          <div class="select-wrap">
+            <select id="d-color1">
+              <option value="">Selecciona color...</option>
+            </select>
+          </div>
+          <div class="field-error">Selecciona el color</div>
+        </div>
+
+        <!-- Talla par 1 -->
         <div class="detail-group" id="fg-talla">
           <div class="detail-group-label">Talla <span style="color:#C0392B">*</span></div>
           <select class="detail-select" id="d-talla">
@@ -653,6 +668,32 @@
             <option>43</option><option>44</option>
           </select>
           <div class="field-error">Selecciona tu talla</div>
+        </div>
+
+        <!-- Par 2 (solo visible con 2 pares) -->
+        <div id="par2-section" style="display:none">
+          <div class="vz-par-header">Par 2 — <span id="par2-nombre"></span></div>
+
+          <div class="form-group" id="fg-color2">
+            <label>Color <span>*</span></label>
+            <div class="select-wrap">
+              <select id="d-color2">
+                <option value="">Selecciona color...</option>
+              </select>
+            </div>
+            <div class="field-error">Selecciona el color del 2do par</div>
+          </div>
+
+          <div class="detail-group" id="fg-talla2">
+            <div class="detail-group-label">Talla <span style="color:#C0392B">*</span></div>
+            <select class="detail-select" id="d-talla2">
+              <option value="">Selecciona tu talla</option>
+              <option>34</option><option>35</option><option>36</option><option>37</option><option>38</option>
+              <option>39</option><option>40</option><option>41</option><option>42</option>
+              <option>43</option><option>44</option>
+            </select>
+            <div class="field-error">Selecciona la talla del 2do par</div>
+          </div>
         </div>
 
         <!-- Método de pago (fijo: contraentrega) -->
@@ -887,19 +928,61 @@
     });
   }
 
-  // ── RESUMEN (actualiza al cambiar cantidad) ──
+  // ── HELPER: índice de modelo por nombre ──
+  function getModeloIdx(nombre) {
+    for (var i = 0; i < productos.length; i++) {
+      if (productos[i].nombre === nombre) return i;
+    }
+    return modeloActual;
+  }
+
+  // ── HELPER: poblar select de colores ──
+  function vzBuildColorSelect(selectId, modelIdx) {
+    var sel = document.getElementById(selectId);
+    if (!sel) return;
+    var prev = sel.value;
+    sel.innerHTML = '<option value="">Selecciona color...</option>';
+    productos[modelIdx].colores.forEach(function(c) {
+      var opt = document.createElement('option');
+      opt.value = c.nombre;
+      opt.textContent = c.nombre;
+      sel.appendChild(opt);
+    });
+    if (prev) sel.value = prev;
+  }
+
+  // ── RESUMEN (actualiza al cambiar cantidad / modelo) ──
   function actualizarResumen() {
-    var cantVal = document.getElementById('d-cant').value;
-    var n       = parseInt(cantVal) || 0;
-    var precio  = n === 2 ? '$199.900' : '$109.900';
-    var fg2     = document.getElementById('fg-modelo2');
-    if (fg2) fg2.style.display = (n === 2) ? '' : 'none';
-    if (n !== 2) document.getElementById('d-modelo2').value = '';
-    if (!cantVal) return;
+    var cantVal  = document.getElementById('d-cant').value;
+    var n        = parseInt(cantVal) || 0;
+    var esDos    = (n === 2);
+    var precio   = esDos ? '$199.900' : '$109.900';
+    var modelo2val = document.getElementById('d-modelo2').value;
+    var m2idx    = modelo2val ? getModeloIdx(modelo2val) : modeloActual;
+
+    // Mostrar/ocultar campos del 2do par
+    document.getElementById('fg-modelo2').style.display   = esDos ? '' : 'none';
+    document.getElementById('par1-header').style.display  = esDos ? '' : 'none';
+    document.getElementById('par2-section').style.display = esDos ? '' : 'none';
+    if (!esDos) {
+      document.getElementById('d-modelo2').value = '';
+      document.getElementById('d-color2').value  = '';
+      document.getElementById('d-talla2').value  = '';
+    }
+
+    // Nombres de los pares
     var p = productos[modeloActual];
-    document.getElementById('resumen-modelo').textContent = p.nombre + ' × ' + n;
-    document.getElementById('resumen-precio').textContent = precio;
-    document.getElementById('resumen-total').textContent  = precio + ' COP';
+    document.getElementById('par1-nombre').textContent = p.nombre;
+    document.getElementById('par2-nombre').textContent = modelo2val || p.nombre;
+
+    // Colores
+    vzBuildColorSelect('d-color1', modeloActual);
+    if (esDos) vzBuildColorSelect('d-color2', m2idx);
+
+    if (!cantVal) return;
+    document.getElementById('resumen-modelo').textContent  = p.nombre + ' × ' + n;
+    document.getElementById('resumen-precio').textContent  = precio;
+    document.getElementById('resumen-total').textContent   = precio + ' COP';
     document.getElementById('vz-sticky-price').textContent = precio + ' COP';
   }
 
@@ -917,6 +1000,7 @@
     buildModelDots(idx);
     vzBuildSlider(p.imgs);
     vzPlay();
+    vzBuildColorSelect('d-color1', idx);
     actualizarResumen();
   }
 
@@ -925,15 +1009,17 @@
     modeloActual = idx;
     actualizarDetalle(idx);
 
-    document.getElementById('d-cant').value     = dos ? '2' : '';
-    document.getElementById('d-modelo2').value  = '';
-    document.getElementById('fg-modelo2').style.display = dos ? '' : 'none';
-    document.getElementById('d-talla').value    = '';
-    document.getElementById('dp1').checked      = true;
-    document.getElementById('d-nombre').value   = '';
-    document.getElementById('d-celular').value  = '';
-    document.getElementById('d-ciudad').value   = '';
+    document.getElementById('d-cant').value      = dos ? '2' : '';
+    document.getElementById('d-modelo2').value   = '';
+    document.getElementById('d-color1').value    = '';
+    document.getElementById('d-talla').value     = '';
+    document.getElementById('d-color2').value    = '';
+    document.getElementById('d-talla2').value    = '';
+    document.getElementById('d-nombre').value    = '';
+    document.getElementById('d-celular').value   = '';
+    document.getElementById('d-ciudad').value    = '';
     document.getElementById('d-direccion').value = '';
+    vzBuildColorSelect('d-color1', idx);
 
     document.getElementById('detailScroll').scrollTop = 0;
     document.getElementById('detailScreen').classList.add('open');
@@ -977,6 +1063,8 @@
 
   function vzElegirColor(nombreColor) {
     vzCerrarLightbox();
+    var sel = document.getElementById('d-color1');
+    if (sel) { sel.value = nombreColor; setFgError('fg-color1', false); }
     document.getElementById('vzForm').scrollIntoView({ behavior: 'smooth' });
   }
 
@@ -1022,22 +1110,29 @@
 
   function confirmarPedido() {
     var cant         = document.getElementById('d-cant').value;
+    var color1       = document.getElementById('d-color1').value;
     var talla        = document.getElementById('d-talla').value;
+    var color2       = document.getElementById('d-color2').value;
+    var talla2       = document.getElementById('d-talla2').value;
     var nombre       = document.getElementById('d-nombre').value.trim();
     var celular      = document.getElementById('d-celular').value.trim();
     var departamento = document.getElementById('d-departamento').value.trim();
     var ciudad       = document.getElementById('d-ciudad').value.trim();
     var direccion    = document.getElementById('d-direccion').value.trim();
+    var esDos        = cant == 2;
     var pago         = 'Contraentrega';
 
     // Limpiar errores previos
-    ['fg-cantidad','fg-talla','fg-nombre','fg-celular','fg-departamento','fg-ciudad','fg-direccion'].forEach(function(id){
+    ['fg-cantidad','fg-color1','fg-talla','fg-color2','fg-talla2','fg-nombre','fg-celular','fg-departamento','fg-ciudad','fg-direccion'].forEach(function(id){
       setFgError(id, false);
     });
 
     var ok = true;
     if (!cant)               { setFgError('fg-cantidad', true);     ok = false; }
+    if (!color1)             { setFgError('fg-color1', true);       ok = false; }
     if (!talla)              { setFgError('fg-talla', true);        ok = false; }
+    if (esDos && !color2)    { setFgError('fg-color2', true);       ok = false; }
+    if (esDos && !talla2)    { setFgError('fg-talla2', true);       ok = false; }
     if (!nombre)             { setFgError('fg-nombre', true);       ok = false; }
     if (celular.length < 10) { setFgError('fg-celular', true);      ok = false; }
     if (!departamento)       { setFgError('fg-departamento', true); ok = false; }
@@ -1051,13 +1146,13 @@
     }
 
     var p        = productos[modeloActual];
-    var modelo2  = document.getElementById('d-modelo2').value;
-    var precio   = cant == 2 ? '$199.900' : '$109.900';
+    var modelo2  = document.getElementById('d-modelo2').value || p.nombre;
+    var precio   = esDos ? '$199.900' : '$109.900';
 
     var msg = '🛍️ NUEVO PEDIDO — VZ Footwear\n'
-      + 'Par 1: ' + p.nombre + ' — Talla ' + talla + '\n'
-      + (cant == 2 ? 'Par 2: ' + (modelo2 || p.nombre) + ' — Talla ' + talla + '\n' : '')
-      + 'Cantidad: ' + cant + ' par' + (cant == 2 ? 'es' : '') + ' — ' + precio + ' COP\n'
+      + 'Par 1: ' + p.nombre + ' — ' + color1 + ' — Talla ' + talla + '\n'
+      + (esDos ? 'Par 2: ' + modelo2 + ' — ' + color2 + ' — Talla ' + talla2 + '\n' : '')
+      + 'Cantidad: ' + cant + ' par' + (esDos ? 'es' : '') + ' — ' + precio + ' COP\n'
       + '💳 PAGO: ' + pago + '\n'
       + '──────────────\n'
       + 'CLIENTE: ' + nombre + '\n'
@@ -1087,8 +1182,19 @@
     el.addEventListener('input',  function(){ setFgError(fgId, false); });
     el.addEventListener('change', function(){ setFgError(fgId, false); });
   });
-  document.getElementById('d-talla').addEventListener('change', function(){ setFgError('fg-talla', false); });
-  document.getElementById('d-cant').addEventListener('change', function(){ setFgError('fg-cantidad', false); });
+  document.getElementById('d-talla').addEventListener('change',  function(){ setFgError('fg-talla', false); });
+  document.getElementById('d-talla2').addEventListener('change', function(){ setFgError('fg-talla2', false); });
+  document.getElementById('d-color1').addEventListener('change', function(){ setFgError('fg-color1', false); });
+  document.getElementById('d-color2').addEventListener('change', function(){ setFgError('fg-color2', false); });
+  document.getElementById('d-cant').addEventListener('change',   function(){ setFgError('fg-cantidad', false); });
+  // Cuando cambia el modelo del 2do par, actualizar colores y nombre
+  document.getElementById('d-modelo2').addEventListener('change', function(){
+    var val  = this.value;
+    var m2idx = val ? getModeloIdx(val) : modeloActual;
+    vzBuildColorSelect('d-color2', m2idx);
+    document.getElementById('par2-nombre').textContent = val || productos[modeloActual].nombre;
+    document.getElementById('d-color2').value = '';
+  });
 </script>
 
 </body>
